@@ -1,4 +1,10 @@
-from django.http import HttpResponse
+#from django.http import HttpResponse
+from django.shortcuts import render_to_response
 
-def index( Request ):
-    return HttpResponse("hello world!")
+def show_index( request ):
+    return render_to_response("index.html", { 'bodyType':'home' })
+
+# Home Contests Problems Status Ranklist F.A.Qs
+
+def show_faq( request ):
+    return render_to_response("index.html", { 'bodyType': 'faq' })
