@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Problem List{% endblock %}
-{% block head %}{% endblock %}
+
 {% block body %}
-	<table border="" >
+	<table border="0" >
 		<tr>
 			<th>#</th>
 			<th>Title</th>
@@ -15,6 +15,7 @@
 				<td><a href="/problem/{{ x.id }}/" >{{ x.title }}</td>
 				<td>{{ x.ratio|floatformat:2 }}({{ x.accept }}/{{ x.submit}})</td>
 			</tr>
+			{% endif %}
 		{% endfor %}
 	</table>
 {% endblock %}
