@@ -1,8 +1,8 @@
-{% include 'header.html' %}
-{% if bodyType == 'home' %}
-	<center><b>Welcome to HLJU.Enjoy your AC life.</b></center>
-{% else %}
-	{%  if bodyType == 'faq' %}
-	<center><b>this page will show help imformations.</b></center>
-	{% endif %}
-{% endif %}
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body%}
+
+
+This is a home page.
+
+{% endblock %}
