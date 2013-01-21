@@ -2,14 +2,22 @@ from django.db import models
 
 # Create your models here.
 class TotalInfo( models.Model ):
-    accept = models.IntegerField()
-    submit = models.IntegerField()
-    WA = models.IntegerField()
-    TLE = models.IntegerField()
-    MLE = models.IntegerField()
-    PE = models.IntegerField()
-    Ratio = models.FloatField()
+    accept = models.IntegerField( default = 0 )
+    submit = models.IntegerField( default = 0 )
+    WA = models.IntegerField( default = 0 )
+    TLE = models.IntegerField( default = 0 )
+    MLE = models.IntegerField( default = 0 )
+    PE = models.IntegerField( default = 0 )
+    Ratio = models.FloatField( default = 0 )
 
+class DataFile(models.Model):
+    name = models.CharField(max_length=10, unique=True)
+    in_file = models.FileField(upload_to="problemset/datafile")
+    out_file = models.FileField(upload_to="problemset/datafile")
+    #author = models.ForeignKey(User)
+
+    def __unicode__(self):
+        return u"%s" % ( unicode(self.name) )
 
 class Problem( models.Model ):
     title = models.CharField( max_length = 50 )
@@ -27,7 +35,7 @@ class Problem( models.Model ):
     source = models.CharField( max_length = 256, blank = True )
     
     #te = models.Manager()
-    
+    TestFile = models.ManyToManyField( DataFile, blank = True )
     
     # Total Submit imformation
     #ContestInfo = models.ForeignKey( TotalInfo )
