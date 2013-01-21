@@ -9,6 +9,12 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+
+PROJECT_PATH = "./templates"
+CSS_PATH = PROJECT_PATH+"/css"
+JS_PATH = PROJECT_PATH+"/js"
+IMAGE_PATH = PROJECT_PATH+"/image"
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.

@@ -4,6 +4,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^css/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.CSS_PATH}),
+    url(r'^js/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.JS_PATH}),
+    url(r'^image/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.IMAGE_PATH}),
     url(r'^$', show_index),
 
     #url(r'^problem/', include( urls )),
