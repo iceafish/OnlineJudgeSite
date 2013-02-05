@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class TotalInfo( models.Model ):
+    id = models.AutoField( primary_key=True )
     accept = models.IntegerField( default = 0 )
     submit = models.IntegerField( default = 0 )
     WA = models.IntegerField( default = 0 )
@@ -39,7 +40,7 @@ class Problem( models.Model ):
     
     # Total Submit imformation
     #ContestInfo = models.ForeignKey( TotalInfo )
-    ExerciseInfo = models.ForeignKey( TotalInfo, editable = False )
+    ExerciseInfo = models.ForeignKey( TotalInfo, editable = False, primary_key=True )
     
     # level
     #level = models.IntegerField()
