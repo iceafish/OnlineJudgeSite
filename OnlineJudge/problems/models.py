@@ -1,8 +1,9 @@
 from django.db import models
 
 # Create your models here.
+'''
 class TotalInfo( models.Model ):
-    id = models.AutoField( primary_key=True )
+    id = models.AutoField( 'ID', primary_key=True )
     accept = models.IntegerField( default = 0 )
     submit = models.IntegerField( default = 0 )
     WA = models.IntegerField( default = 0 )
@@ -10,7 +11,7 @@ class TotalInfo( models.Model ):
     MLE = models.IntegerField( default = 0 )
     PE = models.IntegerField( default = 0 )
     Ratio = models.FloatField( default = 0 )
-
+'''
 class DataFile(models.Model):
     name = models.CharField(max_length=10, unique=True)
     in_file = models.FileField(upload_to="problemset/datafile")
@@ -37,13 +38,21 @@ class Problem( models.Model ):
     
     #te = models.Manager()
     TestFile = models.ManyToManyField( DataFile, blank = True )
+
+    accept = models.IntegerField( default = 0, editable = False )
+    submit = models.IntegerField( default = 0, editable = False )
+    WA = models.IntegerField( default = 0, editable = False )
+    TLE = models.IntegerField( default = 0, editable = False )
+    MLE = models.IntegerField( default = 0, editable = False )
+    PE = models.IntegerField( default = 0, editable = False )
+    Ratio = models.FloatField( default = 0, editable = False )
     
     # Total Submit imformation
     #ContestInfo = models.ForeignKey( TotalInfo )
-    ExerciseInfo = models.ForeignKey( TotalInfo, editable = False, primary_key=True )
-    
-    # level
+    #ExerciseInfo = models.OneToOneField( TotalInfo )
+    #ExerciseInfo = models.ForeignKey( TotalInfo, editable = False, primary_key=True )
+    # level    
     #level = models.IntegerField()
     
     def __unicode__( self ):
-        return u'%s | %s' % ( self.id, self.title )
+        return u'%s' % ( self.title )

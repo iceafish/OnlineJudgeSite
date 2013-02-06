@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     
-    url(r'^problemlist/(\d+)/$',show_problem_list),
-    url(r'^problem/(\d+)/$',show_problem),
+    #url(r'^problemlist/(\d+)/$',show_problem_list),
+    #url(r'^problem/(\d+)/$',show_problem),
     
 )

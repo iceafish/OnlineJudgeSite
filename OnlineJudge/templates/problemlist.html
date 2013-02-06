@@ -8,6 +8,13 @@
 			<th>Title</th>
 			<th>Ratio</th>
 		</tr>
+		
+		
+		{% for x in problems %}
+			{{x.id}}  {{x.title}}</br>
+		{% endfor %}
+		
+		
 		{% for x in problems %}
 			{% if x.useAble %}
 			<tr>
