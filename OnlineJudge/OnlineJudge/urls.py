@@ -1,7 +1,10 @@
 from django.conf.urls import patterns, include, url
 from views import *
 from django.contrib import admin
-from problems import urls
+
+import problems.urls
+import users.urls
+#from problems import urls 
 import settings
 admin.autodiscover()
 
@@ -11,10 +14,10 @@ urlpatterns = patterns('',
     url(r'^image/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.IMAGE_PATH}),
     url(r'^$', show_index),
 
-    url(r'^problem/', include( urls )),
+    url(r'^problem/', include( problems.urls )),
     url(r'^faq/$', show_faq),
     #url(r'^submit/(\d+)$', submit_code),
-    #url(r'^admin/', include(admin.site.urls)),
+    url(r'^user/', include( users.urls )),
     
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
