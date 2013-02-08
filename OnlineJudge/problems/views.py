@@ -16,12 +16,13 @@ def show_problem_list( request, page = 1 ):
     end = page*100+1
     '''
     problems = models.Problem.objects.filter()
+    '''
     #print problems
     for x in problems:
         print  "%s | %s"  %  (x.id,x.title)
+    '''
     
-    
-    return render_to_response( "problemlist.html", locals() )
+    return render_to_response( "problemlist.html", { 'problems': problems } )
 
 def show_problem(request):
     return render_to_response("problem.html",locals() )
