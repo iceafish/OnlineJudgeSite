@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %}{% endblock %}</title>
+	{% block head %}<!-- 用于导入CSS文件 -->
+	<link rel="stylesheet" href="/css/header.css">
+	{% endblock %}
+</head>
+
+<body>
+	<header>
+		<h1>Welcome to HeiLongJiang University </h1>
+		<!-- 登录部分，各页面无需改动 -->
+		<div id="login">
+				
+		</div>
+		<!-- 菜单部分 -->
+		<nav>
+			<a href="/">Home</a>
+			<a href="/contests/">Contests</a>
+			<a href="/problem/" >Problem</a>
+			<a href="/status/"  >Status</a>
+			<a href="/ranklist/">Ranklist</a>
+			<a href="/faq/"     >Faq</a>
+		</nav>
+	</header>
+	
+	<div id="body">
+		{% block body %}<!-- 登录部分，各页面无需改动 -->
+			
+		{% endblock %}
+	</div>
+	
+	<footer>
+		Connect us.
+	</footer>
+</body>
+</html>

@@ -1,7 +1,10 @@
-#from users import UserModel
-#from django.contrib import HttpResponse
-#from django.shortcuts import render_to_response
-# Create your views here.
 
+from django.http import HttpResponse
+from django.shortcuts import render_to_response
 def login(request):
-    HttpResponse("have no this problem.")
+    return HttpResponse("loggin have no this problem.")
+    
+def reg(request):
+    
+    return render_to_response("users/reg.html")
+    
