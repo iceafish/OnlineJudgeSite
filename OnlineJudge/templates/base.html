@@ -14,13 +14,19 @@
 		<h1>Welcome to HeiLongJiang University </h1>
 		<!-- 登录部分，各页面无需改动 -->
 		<div id="login">
+			{% if not user_id %}
+			
 				<form action="/user/login/" method="post">
+				<!-- <form action="" method="post"> -->
 				{% csrf_token %}
 					Username:<input type="text" name="username" /><br>
 					Password:<input type="password" name="password"></input><br>
 					<input type="submit" value="Sign In" />
 				</form>
 				<a href="/user/reg/">Register</a>
+			{% else %}
+				Welcome the {{ user_id }} user.
+			{% endif %}
 		</div>
 		<!-- 菜单部分 -->
 		<nav>
