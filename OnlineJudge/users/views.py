@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from users.models import UserModel
 def login(request):
     return HttpResponse("loggin have no this problem.")
     
@@ -11,8 +12,24 @@ def reg(request):
         
         username = request.POST['username']
         password = request.POST['password']
-        
+        ''' if exsit username-->'''
+        if is_ok(username,password):
+            UserModel(username=username, password=password).save()
+            return HttpResponse("success.")
+        else:
+            raise Http404('username or password Error!')
         
     else:
         return render_to_response("users/reg.html")
     
+def is_ok(username,password):
+    if username == "" or password == "":
+        return False
+    else:
+        try:
+            UserModel.objects.get(username = username)
+        except UserModel.DoesNotExist:
+            return True
+        return False
+    
+            
