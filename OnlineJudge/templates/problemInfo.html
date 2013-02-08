@@ -4,6 +4,24 @@
 {% block body %}
 
 	there have some things.
-
+	{{ problem.title }}</br>
+	Time Limit {{ problem.TimeLimit }}s  Memory Limit {{ problem.MemoryLimit }}k</br>
+	Description:</br>
+	{{ problem.description }}</br>
+	Input:</br>
+	{{ problem.input }}</br>
+	Output:</br>
+	{{ problem.output }}</br>
+	Sample Input:</br>
+	{{ problem.SampleInput }}</br>
+	Sample Output:</br>
+	{{ problem.SampleOutput }}</br>
+	{% if problem.hint %}
+		<body>Hint:</body></br>
+		{{ probme.hint }}</br>
+	{% endif %}
+    Source:</br>
+    {{ problem.source }}
+	
 	
 {% endblock %}
