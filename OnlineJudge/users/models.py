@@ -6,9 +6,8 @@ class UserModel(models.Model):
     username = models.CharField(max_length=20,unique=True)
     password = models.CharField(max_length=20)
     
-    
     '''gender = models.BooleanField(blank = True)'''
-    '''school = models.CharField(max_length=128, blank=True)'''
+    #school = models.CharField(max_length=128, blank=True)
     
     
     '''
@@ -19,4 +18,4 @@ class UserModel(models.Model):
     '''info = models.TextField(blank=True)'''
 
     def __unicode__(self):
-        return u'%s' % (unicode(self.user.username))
+        return u"%s" % (unicode(self.username))

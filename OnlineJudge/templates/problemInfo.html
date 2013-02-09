@@ -2,8 +2,7 @@
 {% block title %}Problem {{problem.title}}{% endblock %}
 
 {% block body %}
-
-	there have some things.
+	<center>
 	{{ problem.title }}</br>
 	Time Limit {{ problem.TimeLimit }}s  Memory Limit {{ problem.MemoryLimit }}k</br>
 	Description:</br>
@@ -21,7 +20,11 @@
 		{{ probme.hint }}</br>
 	{% endif %}
     Source:</br>
-    {{ problem.source }}
+    {{ problem.source }}</br></br>
+	
+	
+	<a href="/submit/">submit</a>
+	</center>
 	
 	
 {% endblock %}

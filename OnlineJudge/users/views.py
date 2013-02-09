@@ -5,6 +5,10 @@ from django.template import RequestContext
 
 from users.models import UserModel
 
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+
+
 def login(request):
     if request.method == 'POST':
         if 'username' not in request.POST or 'password' not in request.POST:
