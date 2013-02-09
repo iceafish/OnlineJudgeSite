@@ -1,2 +1,8 @@
 请在这里做版本信息修改说明，注明修改人。
 0.01 修改setting 加入users 模块 zny
+
+2.10 修改user在admin下无法显示的问题
+     修改user的csrf错误
+     problem admin下添加默认排序，添加过滤器，信息添加完整
+     problem 添加submit模板
+     已知问题，user登陆后不能正确显示用户信息，无法登出
