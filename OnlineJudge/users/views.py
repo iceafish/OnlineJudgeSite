@@ -48,7 +48,7 @@ def reg(request):
         
     else:
         return render_to_response("users/reg.html",context_instance=RequestContext(request))
-        
+        #return render_to_response("users/reg.html",request)
 
 def logout(request):
     if 'user_id' in request.session:
