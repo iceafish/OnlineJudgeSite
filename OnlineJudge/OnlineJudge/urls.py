@@ -4,7 +4,7 @@ from django.contrib import admin
 
 import problems.urls
 import users.urls
-import myAdmin.urls
+import myadmin.urls
 #from problems import urls 
 import settings
 admin.autodiscover()
@@ -28,7 +28,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    
-    url(r'^manage/', include(myAdmin.urls) ),
+    url(r'^myadmin/',include(myadmin.urls))
     
 )

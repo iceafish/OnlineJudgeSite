@@ -16,7 +16,7 @@
 		{% block login %}
 		<!-- 登录部分，各页面无需改动 -->
 		<div id="login">
-			{% if "user_id" not in request.session %}
+			{% if not request.session.user_id %}
 				<form action="/user/login/" method="post">
 				<!-- <form action="" method="post"> -->
 				{% csrf_token %}

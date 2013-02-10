@@ -28,4 +28,10 @@ def show_index(request):
     if "admin_username" not in request.session:
         #is not login
         return HttpResponseRedirect("/myadmin/")
-    
+    #
+    #
+    #
+    #
+    #
+    #
+    return render_to_response("myadmin/index.html",locals())

@@ -3,7 +3,8 @@
 	<title>This is a admin page</title>
 </head>
 <body>
-	{% if "admin_username" not in request.session %}
+	
+	{% if not request.session.admin_username %}
 		<form action="/admin/login/" method="post">
 			UserName:<input type="text" name="username" />
 			<br>
