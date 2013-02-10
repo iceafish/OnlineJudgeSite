@@ -5,4 +5,4 @@ from django.http import Http404
 
 # myAdmin
 def show_manage( Response ):
-    return HttpResponse( "adminstrator page." )
+    return render_to_response("admin/login.html")
