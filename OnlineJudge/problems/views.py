@@ -2,10 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from problems import models
 # Create your views here.
-'''
-def show_problem_list( Response ):
-    return HttpResponse( "show problem list" )
-'''
+
 def show_problem_list( request, page = 1 ):
     '''
     try:
