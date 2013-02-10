@@ -31,9 +31,7 @@ def login(request):
 
 def reg(request):
     if 'user_id' in request.session:
-        user_id = request.session['user_id']
-    else:
-        user_id = 0
+        return HttpResponse("You are logged in.can't register.")
     
     if request.method == 'POST':
         if 'username' not in request.POST or 'password' not in request.POST:
@@ -50,7 +48,7 @@ def reg(request):
         
     else:
         return render_to_response("users/reg.html",context_instance=RequestContext(request))
-
+        
 
 def logout(request):
     if 'user_id' in request.session:
