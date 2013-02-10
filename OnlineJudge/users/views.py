@@ -2,7 +2,7 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-
+from django.http import HttpResponseRedirect
 from users.models import UserModel
 
 from django.views.decorators.csrf import csrf_exempt
@@ -24,15 +24,14 @@ def login(request):
             request.session['user_name']=u.username
         else:
             raise Http404("You are logged in.")
-        return render_to_response("users/success.html",context_instance=RequestContext(request))
+        return HttpResponseRedirect("/")
+       # return render_to_response("users/success.html",context_instance=RequestContext(request))
     raise Http404("Only post allow")
 
 
 def reg(request):
     if 'user_id' in request.session:
-        user_id = request.session['user_id']
-    else:
-        user_id = 0
+        return HttpResponse("You are logged in.can't register.")
     
     if request.method == 'POST':
         if 'username' not in request.POST or 'password' not in request.POST:
@@ -49,12 +48,13 @@ def reg(request):
         
     else:
         return render_to_response("users/reg.html",context_instance=RequestContext(request))
-
+        
 
 def logout(request):
     if 'user_id' in request.session:
         del request.session['user_id']
-    return render_to_response("users/logout.html",context_instance=RequestContext(request))
+    return HttpResponseRedirect("/")
+    #return render_to_response("users/logout.html",context_instance=RequestContext(request))
 
 
 def is_ok(username,password):

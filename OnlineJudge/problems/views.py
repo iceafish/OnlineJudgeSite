@@ -14,7 +14,7 @@ def show_problem_list( request, page = 1 ):
     '''
     problems = models.Problem.objects.filter()
     
-    return render_to_response( "problemlist.html", { 'problems': problems } )
+    return render_to_response( "problemlist.html", locals() )
 
 def show_problem( request, problem_id ):
     
