@@ -21,6 +21,7 @@ def login(request):
             except UserModel.DoesNotExist:
                 raise Http404('Not exist this username')
             request.session['user_id']=u.id
+            request.session['user_name']=u.username
         else:
             raise Http404("You are logged in.")
         return render_to_response("users/success.html",context_instance=RequestContext(request))
@@ -48,7 +49,14 @@ def reg(request):
         
     else:
         return render_to_response("users/reg.html",context_instance=RequestContext(request))
-    
+
+
+def logout(request):
+    if 'user_id' in request.session:
+        del request.session['user_id']
+    return render_to_response("users/logout.html",context_instance=RequestContext(request))
+
+
 def is_ok(username,password):
     if username == "" or password == "":
         return False

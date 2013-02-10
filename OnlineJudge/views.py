@@ -5,8 +5,9 @@ from django.http import Http404
 from problems.models import *
 
 def show_index( request ):
-    if 'user_id' in request.session:
+    if 'user_id' in request.session and 'user_name' in request.session:
         user_id = request.session['user_id']
+        user_name = request.session['user_name']
     else:
         user_id = 0
     return render_to_response("index.html", locals() )
@@ -18,8 +19,9 @@ def submit_code( request, problem_id = 0 ):
 
 # just define
 def show_faq( request ):
-    if 'user_id' in request.session:
+    if 'user_id' in request.session and 'user_name' in request.session:
         user_id = request.session['user_id']
+        user_name = request.session['user_name']
     else:
         user_id = 0
     return render_to_response("faq.html", locals() )
