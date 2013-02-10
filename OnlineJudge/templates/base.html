@@ -12,6 +12,8 @@
 <body>
 	<header>
 		<h1>Welcome to HeiLongJiang University </h1>
+		
+		{% block login %}
 		<!-- 登录部分，各页面无需改动 -->
 		<div id="login">
 			{% if "user_id" not in request.session %}
@@ -28,6 +30,7 @@
 					<a href="/user/logout/">Logout</a>
 			{% endif %}
 		</div>
+		{% endblock %}
 		<!-- 菜单部分 -->
 		<nav>
 			<a href="/">Home</a>
