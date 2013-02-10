@@ -14,8 +14,7 @@
 		<h1>Welcome to HeiLongJiang University </h1>
 		<!-- 登录部分，各页面无需改动 -->
 		<div id="login">
-			{% if not user_id %}
-			
+			{% if "user_id" not in request.session %}
 				<form action="/user/login/" method="post">
 				<!-- <form action="" method="post"> -->
 				{% csrf_token %}
@@ -24,10 +23,10 @@
 					<input type="submit" value="Sign In" />
 				</form>
 				<a href="/user/reg/">Register</a>
-			{% else %}
-				Welcome the {{ user_name }} user.
-				<a href="/user/logout/">Logout</a>
-			{% endif %}
+				{% else %}
+					Welcome the {{ request.session.user_name }}  user.
+					<a href="/user/logout/">Logout</a>
+				{% endif %}
 		</div>
 		<!-- 菜单部分 -->
 		<nav>
