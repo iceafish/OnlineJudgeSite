@@ -9,7 +9,6 @@ class UserModel(models.Model):
     '''gender = models.BooleanField(blank = True)'''
     #school = models.CharField(max_length=128, blank=True)
     
-    
     '''
     school can set manytomany type, usr can choose one of these.
     if databases not exist, use can create a new one.

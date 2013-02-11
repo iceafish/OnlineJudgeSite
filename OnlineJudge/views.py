@@ -8,10 +8,6 @@ def show_index( request ):
     return render_to_response("index.html", locals() )
 
 # Home Contests Problems Status Ranklist F.A.Qs
-def submit_code( request, problem_id = 0 ):
-    return render_to_response("submit.html")
-
-
 # just define
 def show_faq( request ):
     return render_to_response("faq.html", locals() )

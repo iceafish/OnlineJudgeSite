@@ -12,10 +12,14 @@ from django.views.decorators.csrf import csrf_exempt
 # myAdmin
 def show_manage( request ):
     if "admin_username" not in request.session:
+        info = AdminUser.objects.filter()
+        if  not info == null:
         #return render_to_response("myadmin/login.html",context_instance=RequestContext(request))
-        return HttpResponseRedirect("/myadmin/login/")
+            return HttpResponseRedirect("/myadmin/login/")
     else:
         return HttpResponseRedirect("/myadmin/index/")
+    
+    
 def login(request):
     if "admin_username" in request.session:
         # is already login
@@ -31,6 +35,7 @@ def login(request):
         return HttpResponseRedirect("/myadmin/index/")
     else:
         return render_to_response("myadmin/login.html",context_instance=RequestContext(request))
+    
 def logout(request):
     if "admin_username" in request.session:
         del request.session['admin_username']

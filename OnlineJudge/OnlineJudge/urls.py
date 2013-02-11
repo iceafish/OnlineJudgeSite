@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from views import *
 from django.contrib import admin
+from problems.views import submit_code
 
 import problems.urls
 import users.urls

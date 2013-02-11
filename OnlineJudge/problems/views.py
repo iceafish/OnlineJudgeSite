@@ -23,3 +23,11 @@ def show_problem( request, problem_id ):
         return HttpResponse("have no this problem.")
     
     return render_to_response( "problemInfo.html", { 'problem': item } )
+
+
+def submit_code( request, problem_id = 0 ):
+    if 'user_id' in request.session:
+        print "can submit a file."
+    else:
+        return HttpResponse("login first.")
+    return render_to_response("submit.html")
