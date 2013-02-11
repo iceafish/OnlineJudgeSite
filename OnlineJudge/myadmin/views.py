@@ -3,11 +3,16 @@ from django.shortcuts import render_to_response
 from django.http import Http404
 from django.http import HttpResponseRedirect
 from myadmin.models import AdminUser
+from django.template import RequestContext
 # Create your views here.
 
 # myAdmin
 def show_manage( request ):
-    return render_to_response("myadmin/login.html")
+    if "admin_username" not in request.session:
+        #return render_to_response("myadmin/login.html",context_instance=RequestContext(request))
+        return HttpResponseRedirect("/myadmin/login/")
+    else:
+        return HttpResponseRedirect("/myadmin/index/")
 def login(request):
     if "admin_username" in request.session:
         # is already login
@@ -16,22 +21,23 @@ def login(request):
         if "username" not in request.POST or "password" not in request.POST:
             raise Http404("Please input username and password!")
         try:
-            u=AdminUser.objects.get(username=username,password=password)
+            u=AdminUser.objects.get(username=request.POST['username'],password=request.POST['password'])
         except AdminUser.DoesNotExist:
             raise Http404("Login Failed!")
-        request.session["admin_uesrname"] = u.username
+        request.session["admin_username"] = u.username
         return HttpResponseRedirect("/myadmin/index/")
     else:
-        return HttpResponseRedirect("/myadmin/")
-    
+        return render_to_response("myadmin/login.html",context_instance=RequestContext(request))
+def logout(request):
+    if "admin_username" in request.session:
+        del request.session['admin_username']
+    return HttpResponseRedirect('/myadmin/')       
+
 def show_index(request):
     if "admin_username" not in request.session:
         #is not login
         return HttpResponseRedirect("/myadmin/")
-    #
-    #
-    #
-    #
-    #
-    #
+    
+    
+    
     return render_to_response("myadmin/index.html",locals())
