@@ -5,7 +5,8 @@
 <body>
 	
 	{% if not request.session.admin_username %}
-		<form action="/admin/login/" method="post">
+		<form action="/myadmin/login/" method="post">
+		{% csrf_token %}
 			UserName:<input type="text" name="username" />
 			<br>
 			PassWord:<input type="password" name="password" />
