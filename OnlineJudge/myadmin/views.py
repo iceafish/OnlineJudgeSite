@@ -38,6 +38,4 @@ def show_index(request):
         #is not login
         return HttpResponseRedirect("/myadmin/")
     
-    
-    
     return render_to_response("myadmin/index.html",locals())
