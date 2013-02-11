@@ -5,6 +5,9 @@ from django.http import HttpResponseRedirect
 from myadmin.models import AdminUser
 # Create your views here.
 
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+
 # myAdmin
 def show_manage( request ):
     return render_to_response("myadmin/login.html")
