@@ -5,14 +5,14 @@ from django.http import HttpResponseRedirect
 from myadmin.models import AdminUser
 from django.template import RequestContext
 # Create your views here.
-
+'''
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
-
+'''
 # myAdmin
 def show_manage( request ):
     if "admin_username" not in request.session:
-        info = AdminUser.objects.filter()
+        info = AdminUser.objects.all()
         if not info:
             return HttpResponseRedirect('/myadmin/reg/')
         else:
@@ -20,7 +20,19 @@ def show_manage( request ):
     else:
         return HttpResponseRedirect("/myadmin/index/")
     
-    
+def reg(request):
+    if not AdminUser.objects.all():
+        if request.method != "POST":
+            return render_to_response('myadmin/reg.html',context_instance=RequestContext(request))
+        else:
+            AdminUser(username = request.POST['username'],password = request.POST['password'] ).save()
+            request.session['admin_username'] = request.POST['username']
+            return HttpResponseRedirect("/myadmin/index/")
+    else:
+        raise Http404("There is a Account.Don't open register")
+        
+
+
 def login(request):
     if "admin_username" in request.session:
         # is already login

@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     url(r'^logout/$',logout),
     url(r'^index/$',show_index),
     url(r'^login/$',login),
+    url(r'^reg/$',reg),
 )
