@@ -29,3 +29,8 @@ OnlineJudgeSite
 		（解决办法应该是当myadmin表为空时，提示用户注册界面。暂定）
 		登录后不能登出。
 	取消readme文件，繁琐，直接用github说明文件README.md，也就是此文件做更新记录。
+2.12.1
+	解决问题：
+		解决在problem下，的一个题目会出现用户登录信息不能显示问题：
+			原因：没有将request传参到题目的模板中，解决办法：使用locals()或者手动传参request
+
