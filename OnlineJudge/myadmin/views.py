@@ -13,8 +13,9 @@ from django.views.decorators.csrf import csrf_exempt
 def show_manage( request ):
     if "admin_username" not in request.session:
         info = AdminUser.objects.filter()
-        if  not info == null:
-        #return render_to_response("myadmin/login.html",context_instance=RequestContext(request))
+        if not info:
+            return HttpResponseRedirect('/myadmin/reg/')
+        else:
             return HttpResponseRedirect("/myadmin/login/")
     else:
         return HttpResponseRedirect("/myadmin/index/")
