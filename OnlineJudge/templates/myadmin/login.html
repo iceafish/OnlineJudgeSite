@@ -1,9 +1,5 @@
-<html>
-<head>
-	<title>This is a admin page</title>
-</head>
-<body>
-	
+{% extends "myadmin/base.html" %}
+{% block body %}
 	{% if not request.session.admin_username %}
 		<form action="/myadmin/login/" method="post">
 		{% csrf_token %}
@@ -17,5 +13,4 @@
 		<!-- 这里添加自动跳转代码 -->
 		<a href="/myadmin/index/">Click here</a>
 	{% endif %}		
-</body>
-</html>
+{% endblock %}
