@@ -17,17 +17,9 @@ def show_problem_list( request, page = 1 ):
     return render_to_response( "problemlist.html", locals() )
 
 def show_problem( request, problem_id ):
-    
     item = models.Problem.objects.get( id = int(problem_id) )
     if ( not item or not item.UseAble ):
         return HttpResponse("have no this problem.")
     problem = item
     return render_to_response( "problemInfo.html", locals() )
 
-
-def submit_code( request, problem_id = 0 ):
-    if 'user_id' in request.session:
-        print "can submit a file."
-    else:
-        return HttpResponse("login first.")
-    return render_to_response("submit.html")

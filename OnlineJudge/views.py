@@ -18,5 +18,5 @@ def show_contest( Response ):
 def show_ranklist( Response ):
     return HttpResponse("this is ranklist.")
 
-def show_status( Response ):
-    return HttpResponse( "this is servers status" )
+def show_status( request ):
+    return render_to_response( "status.html" )
