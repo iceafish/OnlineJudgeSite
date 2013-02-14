@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 from django.http import Http404,HttpResponse,HttpResponseRedirect
-
+from requestQue.models import request_form
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 
@@ -17,9 +17,13 @@ def submit_code( request, problem_id = 0 ):
         {'form':form,},
         context_instance=RequestContext(request))
     '''
-    print request
+    #print request
     '''
     if 'sourceFile' in request.POST:
         print 'df'
     '''
+    print request.POST['sourceFile']
+    print request.FILES
+    
+    
     return HttpResponseRedirect("/status/")

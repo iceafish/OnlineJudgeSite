@@ -10,4 +10,4 @@ class request_form( models.Model ):
     timeUsed = models.FloatField(blank=True)
     languageTypeID = models.IntegerField()
     submitTime = models.DateTimeField()
-   
+    codeFile = models.FileField()
