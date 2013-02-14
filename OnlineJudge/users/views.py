@@ -1,13 +1,10 @@
-from django.http import Http404
-from django.http import HttpResponse
+from django.http import Http404,HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
 from users.models import UserModel
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
-
 
 def login(request):
     if request.method == 'POST':
@@ -27,7 +24,6 @@ def login(request):
         return HttpResponseRedirect("/")
        # return render_to_response("users/success.html",context_instance=RequestContext(request))
     raise Http404("Only post allow")
-
 
 def reg(request):
     if 'user_id' in request.session:
