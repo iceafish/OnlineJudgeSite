@@ -55,8 +55,7 @@ def logout(request):
         del request.session['user_id']
     return HttpResponseRedirect("/")
     #return render_to_response("users/logout.html",context_instance=RequestContext(request))
-
-
+    
 def is_ok(username,password):
     if username == "" or password == "":
         return False
@@ -66,5 +65,3 @@ def is_ok(username,password):
         except UserModel.DoesNotExist:
             return True
         return False
-    
-            

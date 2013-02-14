@@ -5,7 +5,6 @@ from django.http import Http404
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 
-
-def submit_code( request, problem_id = 1 ):
+def submit_code( request, problem_id = 0 ):
     print problem_id
     return render_to_response( "status.html" )
