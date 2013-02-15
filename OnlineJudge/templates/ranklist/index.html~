@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block body %}
+<table>
+
+</table>
+{% endblock %}

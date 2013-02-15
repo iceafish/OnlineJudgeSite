@@ -5,6 +5,9 @@ class UserModel(models.Model):
     #user = models.OneToOneField(User)
     username = models.CharField(max_length=20,unique=True)
     password = models.CharField(max_length=20)
+    score = models.IntegerField()
+    accept = models.IntegerField()
+    submit = models.IntegerField()
     
     '''gender = models.BooleanField(blank = True)'''
     #school = models.CharField(max_length=128, blank=True)

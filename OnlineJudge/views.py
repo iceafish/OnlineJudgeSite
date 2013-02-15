@@ -15,8 +15,8 @@ def show_faq( request ):
 def show_contest( Response ):
     return HttpResponse( "this is Response." )
     
-def show_ranklist( Response ):
-    return HttpResponse("this is ranklist.")
+def show_ranklist( request ):
+    return render_to_response("ranklist/index.html",locals())
 
 def show_status( request ):
     return render_to_response( "status.html" )
