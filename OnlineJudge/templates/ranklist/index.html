@@ -10,6 +10,14 @@
 <th>SUBMIT</th>
 <th>SCORE</th>
 </tr>
-
+{% for x in u %}
+<tr>
+<td>{{x.id}}</td>
+<td>{{x.username}}</td>
+<td>{{x.score}}</td>
+<td>{{x.accept}}</td>
+<td>{{x.submit}}</td>
+</tr>
+{% endfor %}
 </table>
 {% endblock %}

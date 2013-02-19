@@ -16,6 +16,7 @@ def show_contest( Response ):
     return HttpResponse( "this is Response." )
     
 def show_ranklist( request ):
+    u=UserModel.objects.order_by("-score")
     return render_to_response("ranklist/index.html",locals())
 
 def show_status( request ):
