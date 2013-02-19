@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from problems import models
+from judger.forms import SubmitForm
 # Create your views here.
 
 def show_problem_list( request, page = 1 ):
@@ -21,5 +22,6 @@ def show_problem( request, problem_id ):
     if ( not item or not item.UseAble ):
         return HttpResponse("have no this problem.")
     problem = item
+    form = SubmitForm()
     return render_to_response( "problemInfo.html", locals() )
 

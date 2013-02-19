@@ -21,30 +21,16 @@
 	{% endif %}
     Source:</br>
     {{ problem.source }}</br></br>
-	
-
-	<form action="/submit/{{ problem.id }}/" method="post">
+    
+    <form enctype="multipart/form-data" method="post" action="/submit/{{ problem.id }}/">
 	{% csrf_token %}
-		Language:
-        	<select name="programTypeId">
-            	<option value="1"
-                	 selected="true">GNU C++ 4.7</option>
-                <option value="2"
-                    				>Microsoft Visual C++ 2010</option>
-                <option value="5"
-                    				>Java 6</option>
-                <option value="7"
-                    				>Python 2.7</option>
-                <option value="10"
-                    				>GNU C 4</option>
-                <option value="23"
-                    				>Java 7</option>
-            </select></br>
-		Choose file:
-        	<input name="sourceFile" type="file" value=""/></br>
+		<table>
+    	{% for field in form %}
+      		{{ field.label_tag }}: {{ field }}</br>
+    	{% endfor %} 
+  		</table>
 		<input class="submit" type="submit" value="Submit"/></br>
 	</form>
-	
+    
 	</center>
-
 {% endblock %}
