@@ -2,7 +2,7 @@ from django.db import models
 from users.models import UserModel
 # Create your models here.
 
-class request_form( models.Model ):
+class RequestList( models.Model ):
     #Run ID    User    Problem    Result      Time    Language    Submit Time
     user = models.ForeignKey(UserModel)
     problemID = models.IntegerField()
@@ -10,4 +10,4 @@ class request_form( models.Model ):
     timeUsed = models.FloatField(blank=True)
     languageTypeID = models.IntegerField()
     submitTime = models.DateTimeField()
-    codeFile = models.FileField()
+    codeFile = models.CharField()

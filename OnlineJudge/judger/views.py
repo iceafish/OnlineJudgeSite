@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response,RequestContext
 from django.http import Http404,HttpResponse,HttpResponseRedirect
 from judger.forms import SubmitForm
+from requestQue.models import RequestList
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 
