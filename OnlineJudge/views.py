@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.http import Http404
-
+from requestQue.models import RequestList
 from problems.models import *
 
 def show_index( request ):
@@ -19,4 +19,6 @@ def show_ranklist( request ):
     return render_to_response("ranklist/index.html",locals())
 
 def show_status( request ):
-    return render_to_response( "status.html" )
+    
+    statuslist = RequestList.objects.filter()
+    return render_to_response( "status.html" ,locals() )

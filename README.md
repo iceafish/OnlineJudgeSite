@@ -1,6 +1,13 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
 ===============
+2.19.1 icefish
+	实现status显示
+	已知问题：
+		1.status中语言不能从id正确转换成对应文字
+		2.实际上judge 队列并没有实现，而是串行式的，这么设计是错误的
+			目标设计应该是将提交的申请保存在requestQue中，然后显示status
+			而后台对requestQue的id从上一个处理完的位置开始处理新的非new状态的request
 
 2.19 icefish
 	代码提交已经实现，能成功保存，上传文件放在/judger/tmp/中保存
