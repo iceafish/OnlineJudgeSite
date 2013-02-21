@@ -1,6 +1,8 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
-===============
+2.21 kitty 
+	myadmin未完成
+
 2.19.1 icefish
 	实现status显示
 	已知问题：
