@@ -4,6 +4,8 @@ from django.http import Http404
 from django.http import HttpResponseRedirect
 from myadmin.models import AdminUser
 from django.template import RequestContext
+
+from users.models import *
 # Create your views here.
 '''
 from django.views.decorators.csrf import csrf_exempt
@@ -60,3 +62,35 @@ def show_index(request):
         return HttpResponseRedirect("/myadmin/")
     
     return render_to_response("myadmin/index.html",locals())
+
+def add_user(request):
+    if "admin_username" not in request.session:
+        #is not login
+        return HttpResponseRedirect("/myadmin/")
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        accept = request.POST['accept']
+        submit = request.POST['submit']
+        score = request.POST['score']
+        try:
+            UserModel.objects.get(username = username)
+        except DoesNotExist:
+            UserModel(username=username,password=password,accept=accept,submit=submit,score=score).save()
+        else:
+            raise Http404("Username is repeat.")
+    else:
+        return render_to_response("myadmin/user/add.html",locals())
+
+def alter_user(request,id):
+    if "admin_username" not in request.session:
+        #is not login
+        return HttpResponseRedirect("/myadmin/")
+        
+
+'''
+def add_object(request,table_name):
+    if "admin_username" not in request.session:
+        #is not login
+        return HttpResponseRedirect("/myadmin/")
+'''

@@ -8,4 +8,7 @@ urlpatterns = patterns('',
     url(r'^index/$',show_index),
     url(r'^login/$',login),
     url(r'^reg/$',reg),
+    url(r'^user/add/$',add_user),
+    url(r'^user/$',alter_user),
+    
 )
