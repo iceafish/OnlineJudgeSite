@@ -1,5 +1,8 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
+
+2.23 kitty
+	续写myadmin
 2.21 kitty 
 	myadmin未完成
 
