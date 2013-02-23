@@ -6,10 +6,10 @@ from myadmin.models import AdminUser
 from django.template import RequestContext
 from users.models import *
 # Create your views here.
-'''
+
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
-'''
+
 # myAdmin
 def show_manage( request ):
     if "admin_username" not in request.session:
@@ -74,10 +74,11 @@ def add_user(request):
         score = request.POST['score']
         try:
             UserModel.objects.get(username = username)
-        except DoesNotExist:
+        except:
             UserModel(username=username,password=password,accept=accept,submit=submit,score=score).save()
         else:
             raise Http404("Username is repeat.")
+        return HttpResponse(ur'Add User is success <a href="/myadmin/index/">Index</a>')
     else:
         return render_to_response("myadmin/user/add.html",locals())
 
