@@ -4,7 +4,6 @@ from django.http import Http404
 from django.http import HttpResponseRedirect
 from myadmin.models import AdminUser
 from django.template import RequestContext
-S
 from users.models import *
 # Create your views here.
 '''
