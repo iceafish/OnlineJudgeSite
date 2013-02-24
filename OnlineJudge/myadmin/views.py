@@ -86,8 +86,13 @@ def alter_user(request,id):
     if "admin_username" not in request.session:
         #is not login
         return HttpResponseRedirect("/myadmin/")
-        
 
+def show_user(request):
+    if "admin_username" not in request.session:
+        #is not login
+        return HttpResponseRedirect("/myadmin/")
+    u=UserModel.objects.all()
+    return render_to_response("myadmin/user/showuser.html",locals())
 '''
 def add_object(request,table_name):
     if "admin_username" not in request.session:
