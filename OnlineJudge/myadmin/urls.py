@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^login/$',login),
     url(r'^reg/$',reg),
     url(r'^user/add/$',add_user),
-    url(r'^user/$',alter_user),
+    url(r'^user/$',show_user),
+    url(r'^user/(\d+)/$',alter_user),
     
 )

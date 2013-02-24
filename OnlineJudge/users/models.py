@@ -8,7 +8,7 @@ class UserModel(models.Model):
     score = models.IntegerField(default=0)
     accept = models.IntegerField(default=0)
     submit = models.IntegerField(default=0)
-    
+    active = models.BooleanField(default=True)
     '''gender = models.BooleanField(blank = True)'''
     #school = models.CharField(max_length=128, blank=True)
     
@@ -21,3 +21,8 @@ class UserModel(models.Model):
 
     def __unicode__(self):
         return u"%s" % (unicode(self.username))
+class SuperUserModel(models.Model):
+    username = models.CharField(max_length=20,unique=True)
+    password = models.CharField(max_length=20)
+    active = models.BooleanField(default = True)
+    

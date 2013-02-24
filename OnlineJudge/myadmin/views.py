@@ -86,14 +86,26 @@ def alter_user(request,id):
     if "admin_username" not in request.session:
         #is not login
         return HttpResponseRedirect("/myadmin/")
-
+    u=UserModel.objects.get(id=id)
+    print u
+    if request.method == 'POST':
+        UserModel(id=u.id,username=u.username,password=request.POST['password'],submit=request.POST['submit'],accept=request.POST['accept'],score=request.POST['score']).save()
+        return HttpResponse(ur'Alter user info success <a href="/myadmin/index/">Index</a>')
+        
+    else:
+        return render_to_response("myadmin/user/alteruser.html",locals())
 def show_user(request):
     if "admin_username" not in request.session:
         #is not login
         return HttpResponseRedirect("/myadmin/")
     u=UserModel.objects.all()
     return render_to_response("myadmin/user/showuser.html",locals())
-
+def show_super_user(request):
+    if "admin_username" not in request.session:
+        #is not login
+        return HttpResponseRedirect("/myadmin/")
+    u=SuperUserModel.objects.all()
+    return render_to_response("myadmin/superuser/showuser.html",locals())
 
 '''
 def add_object(request,table_name):
