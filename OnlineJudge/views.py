@@ -20,6 +20,5 @@ def show_ranklist( request ):
     return render_to_response("ranklist/index.html",locals())
 
 def show_status( request ):
-    
-    statuslist = RequestList.objects.filter()
+    statuslist = RequestList.objects.order_by("-id")
     return render_to_response( "status.html" ,locals() )

@@ -22,15 +22,19 @@
     Source:</br>
     {{ problem.source }}</br></br>
     
-    <form enctype="multipart/form-data" method="post" action="/submit/{{ problem.id }}/">
-	{% csrf_token %}
-		<table>
-    	{% for field in form %}
-      		{{ field.label_tag }}: {{ field }}</br>
-    	{% endfor %} 
-  		</table>
-		<input class="submit" type="submit" value="Submit"/></br>
-	</form>
+    {% if request.session.user_id %}
+	    <form enctype="multipart/form-data" method="post" action="/submit/{{ problem.id }}/">
+		{% csrf_token %}
+			<table>
+	    	{% for field in form %}
+	      		{{ field.label_tag }}: {{ field }}</br>
+	    	{% endfor %} 
+	  		</table>
+			<input class="submit" type="submit" value="Submit"/></br>
+		</form>
+    {% else %}
+   	 	<font size="6px" color="red" >If you want to submit your code</br> please log first.</font>
+    {% endif %}
     
 	</center>
 {% endblock %}

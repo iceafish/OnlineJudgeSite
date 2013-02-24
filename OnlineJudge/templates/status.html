@@ -18,17 +18,17 @@
 		<td> <center>{{items.result}} </center></td>
 		<td> <center>{{items.timeUsed}} </center></td>
 		
-		{% if items.languageID == 1 %}
+		{% if items.languageTypeID == 1 %}
 			<td> <center> GNU C </center></td>
-		{% elif items.languageID == 2 %}
+		{% elif items.languageTypeID == 2 %}
 			<td> <center> GNU C++ 4.7 </center></td>
-		{% elif items.languageID == 3 %}
+		{% elif items.languageTypeID == 3 %}
 			<td> <center> Microsoft Visual C++ 2010 </center></td>
-		{% elif items.languageID == 4 %}
+		{% elif items.languageTypeID == 4 %}
 			<td> <center> Java </center></td>
 		{% endif %}
 		
-		<td> <center>{{items.submitTime}} </center></td>
+		<td><center>{{items.submitTime}} </center></td>
 	</tr>
 	{% endfor %}
 	</table>

@@ -29,6 +29,7 @@ def submit_code( request, problem_id = 0 ):
                                  languageTypeID = request.POST['Language'],
                                  submitTime = datetime.datetime.now(),
                                  codeFile = "/judger/tmp/"+file.name)
+            print RList.languageTypeID
             RList.save()
             return HttpResponseRedirect("/status/")
         else:
