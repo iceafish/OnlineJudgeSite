@@ -2,13 +2,17 @@ OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
 ===============
 
-
 2.24.1 icefish
 	主要对之前bug进行修复
 		1.对于2.19.1中 1 问题解决。可以正常显示提交语言
 		2.对status的排列顺序调整
 		3.解决在无用户登录的情况下，仍可提交题目的bug
 
+2.23 kitty
+	续写myadmin
+2.21 kitty 
+	myadmin未完成
+	
 2.19.1 icefish
 	实现status显示
 	已知问题：
