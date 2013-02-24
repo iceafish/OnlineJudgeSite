@@ -93,6 +93,8 @@ def show_user(request):
         return HttpResponseRedirect("/myadmin/")
     u=UserModel.objects.all()
     return render_to_response("myadmin/user/showuser.html",locals())
+
+
 '''
 def add_object(request,table_name):
     if "admin_username" not in request.session:
