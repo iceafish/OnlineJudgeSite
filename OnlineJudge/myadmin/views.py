@@ -129,6 +129,7 @@ def alter_super_user(request):
         AdminUser(username = request.POST['username'],password = request.POST['password'] ).save()
         return HttpResponse('Alter supername is success.<a href="/myadmin/index/">To->Index</a>')
     #HttpResponseRedirect("/myadmin/index/")
+
 '''
 def add_object(request,table_name):
     if "admin_username" not in request.session:

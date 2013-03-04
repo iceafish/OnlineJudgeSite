@@ -13,12 +13,12 @@ urlpatterns = patterns('',
     url(r'^user/(\d+)/$',alter_user),
     
     
-    url(r'^superuser/add/$',add_user),
+    url(r'^superuser/add/$',add_super_user),
     url(r'^superuser/$',show_super_user),
-    url(r'^superuser/(\d+)/$',alter_user),
+    url(r'^superuser/(\d+)/$',alter_super_user),
     
-    url(r'^problem/add/$',add_problem),
-    url(r'^problem/$',show_problem),
-    url(r'^problem/(\d+)/$',alter_problem),
+  #  url(r'^problem/add/$',add_problem),
+  #  url(r'^problem/$',show_problem),
+  #  url(r'^problem/(\d+)/$',alter_problem),
     
 )
