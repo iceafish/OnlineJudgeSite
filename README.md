@@ -1,6 +1,9 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
-===============
+
+
+3.4 kitty
+	稍微改动下myadmin,用以增加对superuser 的增添与修改操作。
 
 2.24.1 icefish
 	主要对之前bug进行修复

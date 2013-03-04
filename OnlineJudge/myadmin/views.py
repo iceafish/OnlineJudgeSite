@@ -106,7 +106,29 @@ def show_super_user(request):
         return HttpResponseRedirect("/myadmin/")
     u=SuperUserModel.objects.all()
     return render_to_response("myadmin/superuser/showuser.html",locals())
-
+def add_super_user(request):
+    if "admin_username" not in request.session:
+        #is not login
+        return HttpResponseRedirect("/myadmin/")
+    if request.method != "POST":
+        return render_to_response('myadmin/reg.html',context_instance=RequestContext(request))
+    else:
+        AdminUser(username = request.POST['username'],password = request.POST['password'] ).save()
+        return HttpResponseRedirect("/myadmin/index/")
+def alter_super_user(request):
+    if "admin_username" not in request.session:
+        #is not login
+        return HttpResponseRedirect("/myadmin/")
+    if request.method != "POST":
+        return render_to_response('myadmin/reg.html',context_instance=RequestContext(request))
+    else:
+        try:
+            u=AdminUser.objects.get(username=request.POST['username'])
+        except:
+            return HttpResponse('Not found this SuperUsername')
+        AdminUser(username = request.POST['username'],password = request.POST['password'] ).save()
+        return HttpResponse('Alter supername is success.<a href="/myadmin/index/">To->Index</a>')
+    #HttpResponseRedirect("/myadmin/index/")
 '''
 def add_object(request,table_name):
     if "admin_username" not in request.session:
