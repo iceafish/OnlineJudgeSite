@@ -4,7 +4,7 @@ from django.http import Http404
 from django.http import HttpResponseRedirect
 from myadmin.models import AdminUser
 from django.template import RequestContext
-from users.models import *
+from models import AdminUser
 # Create your views here.
 
 from django.views.decorators.csrf import csrf_exempt
@@ -104,29 +104,34 @@ def show_super_user(request):
     if "admin_username" not in request.session:
         #is not login
         return HttpResponseRedirect("/myadmin/")
-    u=SuperUserModel.objects.all()
+    u=AdminUser.objects.all()
+    print u
     return render_to_response("myadmin/superuser/showuser.html",locals())
 def add_super_user(request):
     if "admin_username" not in request.session:
         #is not login
         return HttpResponseRedirect("/myadmin/")
     if request.method != "POST":
-        return render_to_response('myadmin/reg.html',context_instance=RequestContext(request))
+        return render_to_response('myadmin/superuser/reg.html',context_instance=RequestContext(request))
     else:
         AdminUser(username = request.POST['username'],password = request.POST['password'] ).save()
         return HttpResponseRedirect("/myadmin/index/")
-def alter_super_user(request):
+def alter_super_user(request,id):
     if "admin_username" not in request.session:
         #is not login
         return HttpResponseRedirect("/myadmin/")
+    try:
+        u=AdminUser.objects.get(id = id)
+    except:
+        return HttpResponse('Not found this SuperUsername')
+        
     if request.method != "POST":
-        return render_to_response('myadmin/reg.html',context_instance=RequestContext(request))
+        return render_to_response('myadmin/superuser/alteruser.html',locals())
     else:
-        try:
-            u=AdminUser.objects.get(username=request.POST['username'])
-        except:
-            return HttpResponse('Not found this SuperUsername')
-        AdminUser(username = request.POST['username'],password = request.POST['password'] ).save()
+        if u.password == request.POST['old_pass']:
+            AdminUser(id=id,username=u.username,password=request.POST['new_pass']).save()
+        else:
+            return HttpResponse("Old Password is not right")
         return HttpResponse('Alter supername is success.<a href="/myadmin/index/">To->Index</a>')
     #HttpResponseRedirect("/myadmin/index/")
 

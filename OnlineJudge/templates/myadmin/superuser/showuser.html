@@ -5,11 +5,15 @@
 <tr>
 <th>ID.</th>
 <th>用户名</th>
+</tr>
 
-</tr>
+{% for x in u %}
+
 <tr>
-<td></td>
+<td><a href="/myadmin/superuser/{{ x.id }}/" >{{ x.id }}</a></td>
+<td>{{ x.username }}</td>
 </tr>
+{% endfor %}
 </table>
 
 {% endblock %}

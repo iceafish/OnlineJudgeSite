@@ -1,1 +1,12 @@
-This is ALTERUSER.html but not write.
+{% extends "myadmin/base.html" %}
+{% block body %}
+
+<form action="" method="post">
+用户名:{{u.username}}
+<br>
+原密码:<input type="password" name="old_pass" /><br>
+新密码:<input type="password" name="new_pass" /><br>
+<input type="submit" value="Submit" />
+</form>
+
+{% endblock %}
