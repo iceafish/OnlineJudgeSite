@@ -1,6 +1,11 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
 
+3.6 icefish
+	数据库变更为sqlite3，默认管理员账号为
+			admin，密码admin
+	数据库文件放在网站根目录data.db
+	暂时隐藏contest
 
 3.4 kitty
 	稍微改动下myadmin,用以增加对superuser 的增添与修改操作。
