@@ -1,6 +1,10 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
 
+3.7 icefish
+	judge 添加judge_server判题服务器，目前只能接收判题请求，无请求队列。
+		判题前需运行judge_server服务器。
+	judge 环境参数放在judger/setting.py中。
 3.6 icefish
 	数据库变更为sqlite3，默认管理员账号为
 			admin，密码admin
