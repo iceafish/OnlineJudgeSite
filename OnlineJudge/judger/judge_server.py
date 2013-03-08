@@ -2,8 +2,7 @@ import traceback,time
 from struct import pack
 from setting import *
 from socket import *
-#from requestQue.models import RequestList
-
+from requestQue.models import RequestList
 
 host = judge_server
 port = judge_post
