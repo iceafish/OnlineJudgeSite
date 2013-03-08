@@ -1,6 +1,8 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
-
+3.8 icefish
+	FAQ添加内容，复制POJ FAQ主体暂用。
+	继续编写了judge
 3.7 icefish
 	judge 添加judge_server判题服务器，目前只能接收判题请求，无请求队列。
 		判题前需运行judge_server服务器。

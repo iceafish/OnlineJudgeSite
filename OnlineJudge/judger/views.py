@@ -6,6 +6,7 @@ from time import ctime
 import datetime
 from socket import *
 from setting import *
+from struct import unpack
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 
@@ -13,12 +14,9 @@ def submit_code( request, problem_id = 0 ):
     host = judge_server
     port = judge_post
     s = socket(AF_INET, SOCK_DGRAM)
-    #s.sendto('', (host, port))
-    #buf = s.recvfrom(2048)[0]
     if request.method == 'POST':
         form = SubmitForm(request.POST,request.FILES)
         if form.is_valid():
-            #save imfo just for test
             file = request.FILES['file']
             form.save( file )
             RList = RequestList( user = request.session['user_name'], 
@@ -28,12 +26,26 @@ def submit_code( request, problem_id = 0 ):
                                  languageTypeID = request.POST['Language'],
                                  submitTime = datetime.datetime.now(),
                                  codeFile = "/judger/tmp/"+file.name)
-            #print RList.languageTypeID
             RList.save()
             s.sendto('', (host, port))
-            ReturnRes = s.recvfrom(1024)
-            print ReturnRes
-            RList.result = ReturnRes
+            ReturnRes = s.recvfrom(2048)[0]
+            res, timeuse = unpack('ii', ReturnRes)
+            print res ,timeuse
+            anws = {
+                    1 : 'Accepted',
+                    2 : 'Wrong Answer',
+                    3 : 'Presentation Error',
+                    4 : 'Time Limit Exceeded',
+                    5 : 'Memory Limit Exceeded',
+                    6 : 'Runtime Error',
+                    7 : 'Output Limit Exceeded',
+                    8 : 'Compile Error',
+                    9 : 'Validator Error' }
+            if  0<res<10 :
+                RList.result = anws[ res ]
+            else:
+                RList.result = 'System Error'
+            RList.timeUsed = timeuse
             RList.save()
             return HttpResponseRedirect("/status/")
         else:
