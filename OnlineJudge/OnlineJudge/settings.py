@@ -127,7 +127,7 @@ INSTALLED_APPS = (
     'problems',
     'users',
     'myadmin',
-    'requestQue',
+    'judger',
 )
 
 # A sample logging configuration. The only tangible logging

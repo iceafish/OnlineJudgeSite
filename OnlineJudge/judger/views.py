@@ -1,24 +1,32 @@
 from django.shortcuts import render_to_response,RequestContext
 from django.http import Http404,HttpResponse,HttpResponseRedirect
 from judger.forms import SubmitForm
-from requestQue.models import RequestList
+from judger.models import RequestList
 from time import ctime
 import datetime
 from socket import *
 from setting import *
 from struct import unpack
+from JudgeQue import put,pull,getSize
+
+def add_judge_request( RListID ):
+    if getSize() < JUDGEQUE_SIZE:
+        put( RListID )
+        print 'now queue size is',getSize()
+    else:
+        print 'err'
+    print 'sending msg...'
+
+
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 
 
-def send_msg():
-    print 'sending msg...'
-
 def submit_code( request, problem_id = 0 ):
     if problem_id == 0:
         return  
-    host = judge_server
-    port = judge_post
+    host = JUDGE_HOST
+    port = JUDGE_POST
     s = socket(AF_INET, SOCK_DGRAM)
     if request.method == 'POST':
         form = SubmitForm(request.POST,request.FILES)
@@ -33,10 +41,14 @@ def submit_code( request, problem_id = 0 ):
                                  submitTime = datetime.datetime.now(),
                                  codeFile = "/judger/tmp/"+file.name)
             RList.save()
+            ########
+            add_judge_request(RList.id)
+            print getSize()
+            
             s.sendto('', (host, port))
             ReturnRes = s.recvfrom(2048)[0]
             res, timeuse = unpack('ii', ReturnRes)
-            print res ,timeuse
+
             save_res(RList,res,timeuse)
             return HttpResponseRedirect("/status/")
         else:

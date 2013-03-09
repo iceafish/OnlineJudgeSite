@@ -1,2 +1,3 @@
-judge_server = 'localhost'
-judge_post = 12345
+JUDGE_HOST = 'localhost'
+JUDGE_POST = 12345
+JUDGEQUE_SIZE = 1024

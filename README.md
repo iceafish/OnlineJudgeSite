@@ -1,5 +1,14 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
+
+3.9 icefish
+	对代码结构进行必要性的调整：
+		防止代码冗余，对代码结果进行调整，删除requestQue模型。
+			调整到judger.models中
+		judger_server调整到工程根目录（暂定）。
+	修改部分已知bug
+	添加judge同步队列，但是目前还不能同步。
+
 3.8.1 icefish
 	修复判题返回结果保存中一个bug
 	调整部分代码结构
