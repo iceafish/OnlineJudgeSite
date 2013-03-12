@@ -1,5 +1,6 @@
 import sys,os
 from datetime import *
+import filecmp
 CUR_DIR = os.getcwd()
 sys.path.append(CUR_DIR)
 os.environ['DJANGO_SETTINGS_MODULE']='OnlineJudge.settings'
@@ -26,7 +27,23 @@ while 1:
     message, addr = s.recvfrom(2048)
     
     #run  judge
-    sys_result = 1
+    filePath = "./judger/tmp/1.cpp"
+    
+    ce_res = os.system("g++ -fno-asm  -O2  -o ./judger/tmp/test.out %s" % filePath)
+    print ce_res
+    if ce_res != 0 :
+        sys_result = 8
+    else:
+        os.system("nohup ./judger/tmp/test.out")
+        is_same = filecmp.cmp("./nohup.out","./judger/tmp/1/output.txt")
+        if is_same:
+            sys_result = 1
+        else:
+            sys_result = 2
+    #################################################
+    '''~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'''
+    ##################################################
+    #sys_result = 1
     reply = pack('ii', sys_result, 1)
     s.sendto(reply, addr)
     print 'judge one problem'
