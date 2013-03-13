@@ -1,4 +1,5 @@
 from django import forms
+from judger.models import RequestList
 
 class SubmitForm( forms.Form ):
     Language = forms.ChoiceField(
@@ -14,7 +15,13 @@ class SubmitForm( forms.Form ):
     file = forms.FileField()
     def save( self, file ):
         if file:
-            destination = open('./judger/tmp/'+file.name, 'wb+')
+            id = RequestList.objects.order_by('-id')[0]
+            id = id.id
+            id = int(id)+1
+            file_name=str(id)+".cpp"
+            #destination = open('./judger/tmp/'+file.name, 'wb+')
+            destination = open('./judger/user_code/'+file_name, 'wb+')
         for chunk in file.chunks():
             destination.write(chunk)
         destination.close()
+        return file_name

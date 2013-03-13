@@ -23,19 +23,25 @@ s.bind((host,port))
 
 while 1:
     print 'Waiting...'
-    print getSize()
-    message, addr = s.recvfrom(2048)
+    print "and Queue's length = "+str(getSize())
+    if not getSize():
+        message, addr = s.recvfrom(2048)
     
     #run  judge
-    filePath = "./judger/tmp/1.cpp"
+    ''' from queue get a item. '''
+    item = pull()
+    
+    filePath = item.codeFile
+    
     
     ce_res = os.system("g++ -fno-asm  -O2  -o ./judger/tmp/test.out %s" % filePath)
-    print ce_res
     if ce_res != 0 :
         sys_result = 8
     else:
-        os.system("nohup ./judger/tmp/test.out")
-        is_same = filecmp.cmp("./nohup.out","./judger/tmp/1/output.txt")
+        input_file_address = "./judge_data/"+item.problemID+"input.txt"
+        output_file_address =  "./judge_data/"+item.problemID+"output.txt"
+        os.system("./judger/tmp/test.out <%s >./judger/tmp/res.txt" % input_file_address)
+        is_same = filecmp.cmp("./judger/tmp/res.txt","output_file_address")
         if is_same:
             sys_result = 1
         else:

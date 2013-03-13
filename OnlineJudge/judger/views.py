@@ -32,18 +32,23 @@ def submit_code( request, problem_id = 0 ):
         form = SubmitForm(request.POST,request.FILES)
         if form.is_valid():
             file = request.FILES['file']
-            form.save( file )
+            file_name = form.save( file )
             RList = RequestList( user = request.session['user_name'],
                                  problemID = problem_id,
                                  result = 'Waiting',
                                  timeUsed = -1,
                                  languageTypeID = request.POST['Language'],
                                  submitTime = datetime.datetime.now(),
-                                 codeFile = "/judger/tmp/"+file.name)
+                                 codeFile = "/judger/user_code/"+file_name)
             RList.save()
             ########
             add_judge_request(RList.id)
             print getSize()
+            
+            ###
+            '''to make ->RList object add to Queue.'''
+            put(RList)
+            ###
             
             s.sendto('', (host, port))
             ReturnRes = s.recvfrom(2048)[0]
