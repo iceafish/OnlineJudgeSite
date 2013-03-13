@@ -24,11 +24,10 @@ s.bind((host,port))
 while 1:
     print 'Waiting...'
     print "and Queue's length = "+str(getSize())
-    if not getSize():
-        message, addr = s.recvfrom(2048)
-    
+    message, addr = s.recvfrom(2048)
     #run  judge
     ''' from queue get a item. '''
+    print getSize()
     item = pull()
     
     filePath = item.codeFile

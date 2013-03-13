@@ -9,9 +9,9 @@ from setting import *
 from struct import unpack
 from JudgeQue import put,pull,getSize
 
-def add_judge_request( RListID ):
+def add_judge_request( RList ):
     if getSize() < JUDGEQUE_SIZE:
-        put( RListID )
+        put( RList )
         print 'now queue size is',getSize()
     else:
         print 'err'
@@ -42,19 +42,21 @@ def submit_code( request, problem_id = 0 ):
                                  codeFile = "/judger/user_code/"+file_name)
             RList.save()
             ########
-            add_judge_request(RList.id)
+            add_judge_request(RList)
             print getSize()
             
-            ###
-            '''to make ->RList object add to Queue.'''
-            put(RList)
-            ###
+            
             
             s.sendto('', (host, port))
+            print 111
             ReturnRes = s.recvfrom(2048)[0]
+            print 222
             res, timeuse = unpack('ii', ReturnRes)
-
+            print 333
+            print res
+            print timeuse
             save_res(RList,res,timeuse)
+            print 2
             return HttpResponseRedirect("/status/")
         else:
             form = SubmitForm()
