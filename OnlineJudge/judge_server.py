@@ -36,10 +36,10 @@ while 1:
     '''print getSize()
     
     item = pull()'''
-    print message , addr
+    #print message , addr
     item = RequestList.objects.order_by("-id")[0]
     filePath = item.codeFile
-    print filePath
+    #print filePath
     
     ce_res = os.system("g++ -fno-asm  -O2  -o ./judger/tmp/test.out %s" % filePath)
     if ce_res != 0 :
@@ -47,7 +47,7 @@ while 1:
     else:
         input_file_address = "./judger/judge_data/"+str(item.problemID)+"/input.txt"
         output_file_address =  "./judger/judge_data/"+str(item.problemID)+"/output.txt"
-        print "./judger/tmp/test.out <%s >./judger/tmp/res.txt" % input_file_address
+        #print "./judger/tmp/test.out <%s >./judger/tmp/res.txt" % input_file_address
         os.system("./judger/tmp/test.out <%s >./judger/tmp/res.txt" % input_file_address)
         is_same = filecmp.cmp("./judger/tmp/res.txt",output_file_address)
         if is_same:
