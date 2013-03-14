@@ -9,6 +9,13 @@ from setting import *
 from struct import unpack
 from JudgeQue import put,pull,getSize
 
+
+##
+'''test'''
+from judger.JudgeQue import getReqID
+##
+
+
 def add_judge_request( RList ):
     if getSize() < JUDGEQUE_SIZE:
         put( RList )
@@ -23,6 +30,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def submit_code( request, problem_id = 0 ):
+    #print "views getReqID = ",getReqID()
     if problem_id == 0:
         return  
     host = JUDGE_HOST
@@ -39,24 +47,18 @@ def submit_code( request, problem_id = 0 ):
                                  timeUsed = -1,
                                  languageTypeID = request.POST['Language'],
                                  submitTime = datetime.datetime.now(),
-                                 codeFile = "/judger/user_code/"+file_name)
+                                 codeFile = "./judger/user_code/"+file_name)
             RList.save()
             ########
-            add_judge_request(RList)
-            print getSize()
+            #add_judge_request(RList)
+            #print getSize()
             
             
             
             s.sendto('', (host, port))
-            print 111
             ReturnRes = s.recvfrom(2048)[0]
-            print 222
             res, timeuse = unpack('ii', ReturnRes)
-            print 333
-            print res
-            print timeuse
             save_res(RList,res,timeuse)
-            print 2
             return HttpResponseRedirect("/status/")
         else:
             form = SubmitForm()

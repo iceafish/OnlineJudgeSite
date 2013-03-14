@@ -11,3 +11,6 @@ def pull():
 
 def getSize():
     return req.qsize()
+def getReqID():
+    return id(req)
+
