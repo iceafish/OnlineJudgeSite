@@ -1,4 +1,4 @@
-import sys,os
+import sys,os,platform
 from datetime import *
 import filecmp
 CUR_DIR = os.getcwd()
@@ -13,6 +13,7 @@ from judger.setting import *
 from socket import *
 
 from judger.models import RequestList
+from problems.models import DataFile
 from judger.JudgeQue import put,pull,getSize
 
 ##
@@ -28,36 +29,29 @@ s.bind((host,port))
 
 while 1:
     print 'Waiting...'
-    #print "and Queue's length = "+str(getSize())
-    #print "judge_server getReqID = ",getReqID()
     message, addr = s.recvfrom(2048)
     #run  judge
-    ''' from queue get a item. '''
-    '''print getSize()
-    
-    item = pull()'''
-    #print message , addr
     item = RequestList.objects.order_by("-id")[0]
     filePath = item.codeFile
-    #print filePath
-    
-    ce_res = os.system("g++ -fno-asm  -O2  -o ./judger/tmp/test.out %s" % filePath)
-    if ce_res != 0 :
-        sys_result = 8
-    else:
-        input_file_address = "./judger/judge_data/"+str(item.problemID)+"/input.txt"
-        output_file_address =  "./judger/judge_data/"+str(item.problemID)+"/output.txt"
-        #print "./judger/tmp/test.out <%s >./judger/tmp/res.txt" % input_file_address
-        os.system("./judger/tmp/test.out <%s >./judger/tmp/res.txt" % input_file_address)
-        is_same = filecmp.cmp("./judger/tmp/res.txt",output_file_address)
-        if is_same:
-            sys_result = 1
+    os_name = platform.system()
+    if os_name == "Linux":
+        ce_res = os.system("g++ -fno-asm  -O2  -o ./judger/tmp/test.out %s" % filePath)
+        if ce_res != 0 :
+            sys_result = 8
         else:
-            sys_result = 2
-    #################################################
-    '''~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'''
-    ##################################################
-    #sys_result = 1
+            test_data = DataFile.objects.get( name = item.problemID )
+            input_file_address =  './'+str(test_data.in_file)
+            output_file_address = './'+str(test_data.out_file)
+           	#print input_file_address 
+            os.system("./judger/tmp/test.out <%s >./judger/tmp/res.out" % input_file_address)
+            is_same = filecmp.cmp("./judger/tmp/res.out",output_file_address)
+            if is_same:
+                sys_result = 1
+            else:
+                sys_result = 2
+    elif os_name == "Windows":
+        sys_result = 1
+
     reply = pack('ii', sys_result, 1)
     s.sendto(reply, addr)
     print 'judge one problem'

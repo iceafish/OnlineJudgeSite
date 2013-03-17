@@ -8,13 +8,12 @@ from socket import *
 from setting import *
 from struct import unpack
 from JudgeQue import put,pull,getSize
-
-
+from problems.models import Problem
+from users.models import *
 ##
 '''test'''
 from judger.JudgeQue import getReqID
 ##
-
 
 def add_judge_request( RList ):
     if getSize() < JUDGEQUE_SIZE:
@@ -28,9 +27,7 @@ def add_judge_request( RList ):
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 
-
 def submit_code( request, problem_id = 0 ):
-    #print "views getReqID = ",getReqID()
     if problem_id == 0:
         return  
     host = JUDGE_HOST
@@ -49,22 +46,22 @@ def submit_code( request, problem_id = 0 ):
                                  submitTime = datetime.datetime.now(),
                                  codeFile = "./judger/user_code/"+file_name)
             RList.save()
-            ########
-            #add_judge_request(RList)
-            #print getSize()
-            
-            
-            
+            curprob = Problem.objects.get( id = problem_id )
+            curuser = UserModel.objects.get( username = RList.user )
+            curprob.submit += 1
+            curuser.submit += 1
+            curprob.save()
+            curuser.save()
             s.sendto('', (host, port))
             ReturnRes = s.recvfrom(2048)[0]
             res, timeuse = unpack('ii', ReturnRes)
-            save_res(RList,res,timeuse)
+            save_res(RList,res,timeuse,curprob,curuser)
             return HttpResponseRedirect("/status/")
         else:
             form = SubmitForm()
     return HttpResponseRedirect( "/problem/"+problem_id )
 
-def save_res(RList,res,timeuse):
+def save_res(RList,res,timeuse,curprob,curuser):
     anws = {
             1 : 'Accepted',
             2 : 'Wrong Answer',
@@ -78,7 +75,18 @@ def save_res(RList,res,timeuse):
     if  0<res<10 :
         RList.result = anws[ res ]
         RList.timeUsed = timeuse
+        if anws == 1:
+            curprob.accept += 1
+            curuser.accept += 1
+            curuser.save()
+        elif anws == 2:
+            curprob.WA += 1
+        elif anws == 3:
+            curprob.PE += 1
+        elif anws == 4:
+            curprob.TLE += 1
     else:
         RList.result = 'System Error'
+        
+    curprob.save()
     RList.save()
-    
