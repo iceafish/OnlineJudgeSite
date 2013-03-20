@@ -1,6 +1,8 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
 
+3.20 kitty 增加contest模块，模板部分未完成。
+
 3.15 icefish
 	更改题目数据添加方法。
 	更改题目数据所在位置
