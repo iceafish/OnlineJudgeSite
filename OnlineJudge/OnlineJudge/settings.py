@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'users',
     'myadmin',
     'judger',
+    'contest',
 )
 
 # A sample logging configuration. The only tangible logging
