@@ -1,0 +1,16 @@
+{% extends "myadmin/base.html" %}
+{% block body %}
+	{% if not request.session.admin_username %}
+		<form action="/myadmin/login/" method="post">
+		{% csrf_token %}
+			UserName:<input type="text" name="username" />
+			<br>
+			PassWord:<input type="password" name="password" />
+			<br>
+			<input type="submit" value="Go!!!" />
+		</form>
+	{% else %}
+		<!-- 这里添加自动跳转代码 -->
+		<a href="/myadmin/index/">Click here</a>
+	{% endif %}		
+{% endblock %}

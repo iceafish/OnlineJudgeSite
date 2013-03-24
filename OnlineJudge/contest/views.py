@@ -8,7 +8,11 @@ def show_contest(request):
     return render_to_response("./contest/index.html",locals())
 def show_contest_problem(request,contest_id):
     #to show problems in contest
-    contest = Contest.objects.get( id = contest_id )
-    problems = Problem.objects.filter( contest_id = contest_id )
+    
+    contest = Contest.objects.get(id = contest_id)
+    problem = contest.problemset.all()
+    
+    
+    
     return render_to_response("./contest/show_contest.html",locals())
     

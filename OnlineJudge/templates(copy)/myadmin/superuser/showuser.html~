@@ -1,0 +1,19 @@
+{% extends "myadmin/base.html" %}
+{% block body %}
+
+<table>
+<tr>
+<th>ID.</th>
+<th>用户名</th>
+</tr>
+
+{% for x in u %}
+
+<tr>
+<td>{{ x.id }}</td>
+<td>{{ x.username }}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

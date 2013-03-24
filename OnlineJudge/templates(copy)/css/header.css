@@ -24,7 +24,5 @@ header h1{
 	display:block;	
 	}
 #login{
-	float:right;
-	position:absolute;
-	margin-right:100px;
+	display:block;
 	}

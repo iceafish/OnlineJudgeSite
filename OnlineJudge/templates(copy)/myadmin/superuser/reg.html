@@ -1,0 +1,10 @@
+{% extends "myadmin/base.html" %}
+{% block body %}
+<form action="/myadmin/superuser/add/" method="post">
+{% csrf_token %}
+username<input type="text" name="username" /><br>
+password<input type="password" name="password" /><br>
+<input type="submit" name="Reg" />
+
+</form>
+{% endblock %}

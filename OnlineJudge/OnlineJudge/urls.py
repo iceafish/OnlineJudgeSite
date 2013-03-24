@@ -22,7 +22,7 @@ urlpatterns = patterns('',
     url(r'^user/', include( users.urls )),
 
 #Not define just have something show    
-    url(r'^contests/$', include(contest.urls)),
+    url(r'^contests/', include(contest.urls)),
     url(r'^ranklist/$', show_ranklist),
     url(r'^status/$', show_status),
     url(r'^faq/$', show_faq),

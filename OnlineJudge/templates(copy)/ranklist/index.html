@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+<table>
+<table>
+<tr>
+<th>No.</th>
+<th>WHO</th>
+<th>AC</th>
+<th>SUBMIT</th>
+<th>SCORE</th>
+</tr>
+{% for x in u %}
+<tr>
+<td>{{x.id}}</td>
+<td>{{x.username}}</td>
+<td>{{x.accept}}</td>
+<td>{{x.submit}}</td>
+<td>{{x.score}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
