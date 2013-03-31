@@ -1,6 +1,7 @@
 from django import forms
 from judger.models import RequestList
-import random 
+import random
+
 class SubmitForm( forms.Form ):
     Language = forms.ChoiceField(
                                widget   = forms.Select(), 
