@@ -9,14 +9,18 @@
 <th>start time</th>
 <th>end time</th>
 <th>status</th>
+<th>Register Contest</th>
+
 </tr>
-{% for x in contest %}
+{% for x in contests %}
 <tr>
-<td>{{x.id}}</td>
-<td>{{x.name}}</td>
+<td><a href="/contests/{{x.id}}">{{x.id}}</a></td>
+<td><a href="/contests/{{x.id}}">{{x.name}}</a></td>
 <td>{{x.start_time}}</td>
 <td>{{x.end_time}}</td>
 <td>{{x.status}}</td>
+<td>--------</td>
+
 </tr>
 {% endfor %}
 </table>

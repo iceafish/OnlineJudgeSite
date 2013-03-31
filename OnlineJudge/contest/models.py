@@ -1,5 +1,5 @@
 from django.db import models
-
+from users.models import UserModel
 # Create your models here.
 class Problem(models.Model):
     title = models.CharField( max_length = 50 )
@@ -23,13 +23,19 @@ class Problem(models.Model):
     in_file = models.FileField(upload_to="problemset/contestfile",blank=True)
     out_file = models.FileField(upload_to="problemset/contestfile",blank=True)
     
+    contest_id = models.IntegerField(default = 0,editable = False)
+    problem_id = models.IntegerField(default = 0,editable = False)
+    
     def __unicode__( self ):
         return u'Problem %s' % ( self.id )
 class Contest(models.Model):
     name = models.CharField(max_length=20)
-    start_time = models.CharField(max_length=20)
-    end_time = models.CharField(max_length=20)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
     status = models.CharField(max_length=20,choices=( ('pending','pending'),('registing','registing'),('accept','accept'))  )
     problemset = models.ManyToManyField(Problem,blank = True)
+    users = models.ManyToManyField(UserModel,blank = True)
+    
     def __unicode__( self ):
         return u'Contest %s' % ( self.id )
+    

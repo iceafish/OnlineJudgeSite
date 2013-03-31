@@ -15,4 +15,7 @@ def show_contest_problem(request,contest_id):
     
     
     return render_to_response("./contest/show_contest.html",locals())
+def show_problem(request,contest_id,problem_id):
+    problem = Contest.objects.get(id = contest_id).problemset.get(id = problem_id)
     
+    return render_to_response("./contest/show_problem.html",locals())

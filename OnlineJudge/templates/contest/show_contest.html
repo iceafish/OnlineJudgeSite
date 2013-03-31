@@ -8,12 +8,12 @@
 <th>Submit</th>
 <th>Accept</th>
 </tr>
-{% for i,x in enumerate(problem) %}
+{% for x in problem %}
 <tr>
-<td>i</td>
-<td>x.title</td>
-<td>x.submit</td>
-<td>x.accept</td>
+<td><a href="{{x.id}}">{{x.id}}</a></td>
+<td>{{x.title}}</td>
+<td>{{x.submit}}</td>
+<td>{{x.accept}}</td>
 </tr>
 {% endfor %}
 </table>
