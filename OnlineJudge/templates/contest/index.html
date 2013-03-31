@@ -2,21 +2,23 @@
 {% block body %}
 <h2>Contest</h2>
 <hr>
-<table border="0">
+<table border="1">
 <tr>
 <th>ID</th>
 <th>name</th>
 <th>start time</th>
 <th>end time</th>
 <th>status</th>
+<th>Register Contest</th>
 </tr>
 {% for x in contests %}
 <tr>
-<td><a href="/contests/{{x.id}}">{{x.id}}</a></td>
-<td><a href="/contests/{{x.id}}">{{x.name}}</a></td>
+<td><a href="/contests/{{x.id}}/">{{x.id}}</a></td>
+<td><a href="/contests/{{x.id}}/">{{x.name}}</a></td>
 <td>{{x.start_time}}</td>
 <td>{{x.end_time}}</td>
 <td>{{x.status}}</td>
+<td>--------</td>
 </tr>
 {% endfor %}
 </table>
