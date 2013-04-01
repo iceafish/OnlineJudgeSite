@@ -1,25 +1,13 @@
 from django.db import models
 
 # Create your models here.
-'''
-class TotalInfo( models.Model ):
-    id = models.AutoField( 'ID', primary_key=True )
-    accept = models.IntegerField( default = 0 )
-    submit = models.IntegerField( default = 0 )
-    WA = models.IntegerField( default = 0 )
-    TLE = models.IntegerField( default = 0 )
-    MLE = models.IntegerField( default = 0 )
-    PE = models.IntegerField( default = 0 )
-    Ratio = models.FloatField( default = 0 )
-'''
 class DataFile(models.Model):
     name = models.CharField(max_length=10, unique=True)
     in_file = models.FileField(upload_to="problemset/datafile")
     out_file = models.FileField(upload_to="problemset/datafile")
     #author = models.ForeignKey(User)
-
     def __unicode__(self):
-        return u"%s" % ( unicode(self.name) )
+        return u"%s" % ( self.name )
 
 class Problem( models.Model ):
     title = models.CharField( max_length = 50 )

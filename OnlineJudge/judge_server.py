@@ -50,6 +50,7 @@ def RunTestdata( type, inputfilePath ):
 def CleanTmp():
     Dir = "./judger/tmp"
     for files in os.listdir(Dir):
+        print files
         tfile = os.path.join(Dir, files)
         if os.path.isfile(tfile):
             os.remove(tfile.replace('\\\\','/'))
