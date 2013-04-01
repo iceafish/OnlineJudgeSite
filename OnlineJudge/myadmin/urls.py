@@ -17,6 +17,10 @@ urlpatterns = patterns('',
     url(r'^superuser/$',show_super_user),
     url(r'^superuser/(\d+)/$',alter_super_user),
     
+   # url(r'^contest/$',show_contest),
+   # url(r'^contest/add/$',add_contest),
+   # url(r'^contest/(/d+)/$',alter_contest),
+    
   #  url(r'^problem/add/$',add_problem),
   #  url(r'^problem/$',show_problem),
   #  url(r'^problem/(\d+)/$',alter_problem),
