@@ -15,29 +15,43 @@ from socket import *
 from judger.models import RequestList
 from problems.models import DataFile,Problem
 
-host = JUDGE_HOST
+host = ''
 port = JUDGE_POST
-s = socket(AF_INET,SOCK_DGRAM)
+s = socket(AF_INET,SOCK_STREAM)
 s.setsockopt(SOL_SOCKET,SO_REUSEADDR,1)
 s.bind((host,port))
+s.listen(4)
 os_name = platform.system()
 
-def Compiler( type ):
-    #('1', 'GNU C',),('2', 'GNU C++ 4.7',), ('3', 'Microsoft Visual C++ 2010',),('4', 'Java',)
+def Compiler( type, filePath ):
+    #('1', 'GNU C',),('2', 'GNU C++ 4.7',), ('3', 'Microsoft Visual C++ 2010',),('4', 'Java',)    
     if type == 1 :
-        ce_res = os.system("gcc -fno-asm -O2 -o ./judger/tmp/test.exe %s" % filePath)
+        if os_name == 'Linux':
+            ce_res = os.system("gcc %s -o ./judger/tmp/teset.exe -ansi -fno-asm -O2 -Wall -lm --static -DONLINE_JUDGE" % filePath)
+        elif os_name == 'Windows':
+            ce_res = os.system("gcc -static -fno-optimize-sibling-calls -fno-strict-aliasing -DONLINE_JUDGE -fno-asm -lm -s -Wl,--stack=268435456 -O2 -o ./judger/tmp/test.exe %s" % filePath)
+        else:
+            print os_name
+            return -1
     elif type == 2:
-        ce_res = os.system("g++ -fno-asm -O2 -o ./judger/tmp/test.exe %s" % filePath)
+        if os_name == 'Linux':
+            ce_res = os.system("g++ %s -o ./judger/tmp/teset.exe -ansi -fno-asm -O2 -Wall -lm --static -DONLINE_JUDGE" % filePath)
+        elif os_name == 'Windows':
+            ce_res = os.system("g++ -static -fno-optimize-sibling-calls -fno-strict-aliasing -DONLINE_JUDGE -lm -s -x c++ -Wl,--stack=268435456 -O2 -o ./judger/tmp/test.exe %s" % filePath)
+        else:
+            print os_name
+            return -1
     #elif type == 3:
-    #elif type == 4:
+    elif type == 4:
+        ce_res = os.system("g++ %s -o ./judger/tmp/teset.exe -ansi -fno-asm -O2 -Wall -lm --static -DONLINE_JUDGE" % filePath)
     else:
         print "please write a compile type error log."
         return -1
     return ce_res
 
-def RunTestdata( type, inputfilePath ):
+def RunTestdata( type, inputfilePath, outfilePath ):
     if type==1 or type==2:
-        cmd = "./judger/tmp/test.exe < %s > ./judger/tmp/res.out" % inputfilePath
+        cmd = "./judger/tmp/test.exe < %s > ./judger/tmp/%s.out" % ( inputfilePath, outfilePath )
     else:
         print "please write a compile type error log."
         return
@@ -57,41 +71,40 @@ def CleanTmp():
         else:
             print "delete file error."
 
-while True:
-    message, addr = s.recvfrom(2048)
-    item = RequestList.objects.order_by("-id")[0]
-    print addr
-    filePath = item.codeFile
-    ##############################
-    
-    
-    ques = Problem.objects.get(id = item.problemID)
-    print ques
-
-    print ques.TestFile.all()
-    
-    
-    
-    
-    
-    
-    
-    ##############################
-    test_data = DataFile.objects.get( name = item.problemID )
-    input_file_address =  './'+str(test_data.in_file)
-    output_file_address = './'+str(test_data.out_file)
-    
-    ce_res = Compiler(item.languageTypeID)
-    if ce_res:
-        sys_result = 8
-    else:
-        RunTestdata( item.languageTypeID, input_file_address )
-        is_same = filecmp.cmp( "./judger/tmp/res.out", output_file_address )
-        if is_same:
-            sys_result = 1
+def RunServer():
+    print "Server is running on port %d" % port
+    while True:
+        clientsock, clientaddr = s.accept()
+        msg = clientsock.recv(1024)
+        if msg:
+            item = RequestList.objects.get(id = msg)
+        filePath = item.codeFile
+        ques = Problem.objects.get(id = item.problemID)
+        ce_res = Compiler( item.languageTypeID, filePath )
+        
+        if ce_res:
+            sys_result = 8
         else:
-            sys_result = 2
+            DataNumb = 0
+            for test_data in ques.TestFile.all():
+                DataNumb += 1
+                InputData =  './'+str(test_data.in_file)
+                OutputData = 'test' + str(DataNumb)
+                SampleOutputData = './'+str(test_data.out_file)
+                RunTestdata( item.languageTypeID, InputData, OutputData )
+                is_same = filecmp.cmp( "./judger/tmp/%s.out"%OutputData, SampleOutputData )
+                if not is_same:
+                    break
+                
+            if is_same:
+                sys_result = 1
+            else:
+                sys_result = 2
+        
+        CleanTmp()
+        reply = pack('ii', sys_result, 1)
+        clientsock.sendall(reply)
+        clientsock.close()
+    s.close()
 
-    CleanTmp()
-    reply = pack('ii', sys_result, 1)
-    s.sendto(reply, addr)
+RunServer()

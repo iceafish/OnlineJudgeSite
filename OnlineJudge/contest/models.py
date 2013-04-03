@@ -33,8 +33,8 @@ class Contest(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     status = models.CharField(max_length=20,choices=( ('pending','pending'),('registing','registing'),('accept','accept'))  )
-    problemset = models.ManyToManyField(Problem , through = 'Contest2Problem')
-    users = models.ManyToManyField(UserModel,blank = True)
+    problemset = models.ManyToManyField(Problem )#, related_name= 'Contest2Problem'
+    users = models.ManyToManyField(UserModel,blank = True)#, related_name= 'User' 
     
     def __unicode__( self ):
         return u'Contest %s' % ( self.id )
