@@ -1,6 +1,25 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
 
+
+4.3 icefish 阶段报告:
+		现阶段主要围绕judge处理需求来设计
+		admin仍用自带的admin操作，后期手动修改前台
+		由于安全和权限管理问题，user需重新设计，方便admin管理
+		判题进度在系统层面(内存,时间,安全监测)
+	已知重要bug:
+		判题结果还不能正确存储
+		判题偶尔出现判题路径错误(原因不明,无规律,不知TCP是否仍存在)
+
+4.3 icefish
+	调整各个编译器编译参数
+	client-server连接改为TCP协议
+	调整judger.view结构
+	现进度:
+		judger服务处理顺序有待调整
+		problem，user数据待更新(等待user重写)
+		判题结束后代码文件归档(等待user重写)
+
 3.31 icefish
 	重写judge_server支持win/Linux下判题
 	正常支持编译器选项
@@ -9,7 +28,8 @@ OnlineJudgeSite
 	暂存问题：
 		判题数据导入方式存在问题，待修改
 		代码文件在判题结束之后没有归属正确位置和命名
-
+		判题结果不全面
+		
 3.24 大整合
 3.20 kitty 增加contest模块，模板部分未完成。
 
