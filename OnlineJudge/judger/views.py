@@ -87,7 +87,7 @@ def submit_code( request, problem_id = 0 ):
                     curprob.TLE += 1
             else:
                 RList.result = 'System Error'
-            curprob.update()
+            curprob.save()
             RList.save()
             print curprob
             print RList
