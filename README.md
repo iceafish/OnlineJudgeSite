@@ -2,6 +2,10 @@ OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
 
 
+4.3 kitty :
+	修改admin，将myadmin删除
+
+
 4.3 icefish 阶段报告:
 		现阶段主要围绕judge处理需求来设计
 		admin仍用自带的admin操作，后期手动修改前台

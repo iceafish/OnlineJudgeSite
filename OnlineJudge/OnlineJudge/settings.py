@@ -126,7 +126,6 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'problems',
     'users',
-    'myadmin',
     'judger',
     'contest',
 )

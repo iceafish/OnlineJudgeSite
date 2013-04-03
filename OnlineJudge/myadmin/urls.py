@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+'''from django.conf.urls import patterns, include, url
 from myadmin.views import *
 from django.contrib import admin
 
@@ -26,3 +26,4 @@ urlpatterns = patterns('',
   #  url(r'^problem/(\d+)/$',alter_problem),
     
 )
+'''

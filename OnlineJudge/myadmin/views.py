@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+'''from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.http import Http404
 from django.http import HttpResponseRedirect
@@ -136,8 +136,11 @@ def alter_super_user(request,id):
     #HttpResponseRedirect("/myadmin/index/")
 
 '''
+
+'''
 def add_object(request,table_name):
     if "admin_username" not in request.session:
         #is not login
         return HttpResponseRedirect("/myadmin/")
 '''
+
