@@ -27,7 +27,7 @@ def Compiler( type, filePath ):
     #('1', 'GNU C',),('2', 'GNU C++ 4.7',), ('3', 'Microsoft Visual C++ 2010',),('4', 'Java',)    
     if type == 1 :
         if os_name == 'Linux':
-            ce_res = os.system("gcc %s -o ./judger/tmp/teset.exe -ansi -fno-asm -O2 -Wall -lm --static -DONLINE_JUDGE" % filePath)
+            ce_res = os.system("gcc %s -o ./judger/tmp/test.exe -ansi -fno-asm -O2 -Wall -lm --static -DONLINE_JUDGE" % filePath)
         elif os_name == 'Windows':
             ce_res = os.system("gcc -static -fno-optimize-sibling-calls -fno-strict-aliasing -DONLINE_JUDGE -fno-asm -lm -s -Wl,--stack=268435456 -O2 -o ./judger/tmp/test.exe %s" % filePath)
         else:
@@ -35,7 +35,7 @@ def Compiler( type, filePath ):
             return -1
     elif type == 2:
         if os_name == 'Linux':
-            ce_res = os.system("g++ %s -o ./judger/tmp/teset.exe -ansi -fno-asm -O2 -Wall -lm --static -DONLINE_JUDGE" % filePath)
+            ce_res = os.system("g++ %s -o ./judger/tmp/test.exe -ansi -fno-asm -O2 -Wall -lm --static -DONLINE_JUDGE" % filePath)
         elif os_name == 'Windows':
             ce_res = os.system("g++ -static -fno-optimize-sibling-calls -fno-strict-aliasing -DONLINE_JUDGE -lm -s -x c++ -Wl,--stack=268435456 -O2 -o ./judger/tmp/test.exe %s" % filePath)
         else:
@@ -43,7 +43,7 @@ def Compiler( type, filePath ):
             return -1
     #elif type == 3:
     elif type == 4:
-        ce_res = os.system("g++ %s -o ./judger/tmp/teset.exe -ansi -fno-asm -O2 -Wall -lm --static -DONLINE_JUDGE" % filePath)
+        ce_res = os.system("g++ %s -o ./judger/tmp/test.exe -ansi -fno-asm -O2 -Wall -lm --static -DONLINE_JUDGE" % filePath)
     else:
         print "please write a compile type error log."
         return -1
