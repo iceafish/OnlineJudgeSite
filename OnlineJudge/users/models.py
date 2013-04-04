@@ -5,9 +5,9 @@ from contest.models import Contest
 
 class UserModel(models.Model):
     user = models.OneToOneField(User)
-    score = models.IntegerField(default=0)
-    accept = models.IntegerField(default=0)
-    submit = models.IntegerField(default=0)
+    score = models.IntegerField(default=0,editable = False)
+    accept = models.IntegerField(default=0,editable = False)
+    submit = models.IntegerField(default=0,editable = False)
     
     problems = models.ManyToManyField(Problem)#show User has solved problems(Exercise)
     contests = models.ManyToManyField(Contest)#show User has registered Contest.
