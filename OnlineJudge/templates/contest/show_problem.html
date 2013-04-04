@@ -1,1 +1,26 @@
-haha
+{% extends "base.html" %}
+{% block title %}
+	{{contest.name}} and {{c2p.problemID}}
+{% endblock %}
+{% block body %}
+
+{{c2p.problemID}}.{{problem.title}}
+<br>Time Limit:{{problem.TimeLimit}} <br>
+<br>Memory Limit:{{problem.MemoryLimit}} <br>
+
+<br>Description<br>
+{{problem.description}}
+<br>Input<br>
+{{problem.input}}
+<br>Output<br>
+{{problem.output}}
+<br>Sample Input<br>
+{{problem.SampleInput}}
+<br>Sample Output<br>
+{{problem.SampleOutput}}
+<br>Hint<br>
+{{problem.hint}}
+<br>source<br>
+{{problem.source}}
+<br>
+{% endblock %}

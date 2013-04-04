@@ -8,12 +8,12 @@
 <th>Submit</th>
 <th>Accept</th>
 </tr>
-{% for x in problem %}
+{% for x in c2p %}
 <tr>
-<td><a href="{{x.id}}">{{x.id}}</a></td>
-<td>{{x.title}}</td>
-<td>{{x.submit}}</td>
-<td>{{x.accept}}</td>
+<td><a href="{{x.problemID}}">{{x.problemID}}</a></td>
+<td>{{x.problem.title}}</td>
+<td>{{x.problem.submit}}</td>
+<td>{{x.problem.accept}}</td>
 </tr>
 {% endfor %}
 </table>
