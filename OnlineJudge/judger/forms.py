@@ -16,8 +16,11 @@ class SubmitForm( forms.Form ):
     file = forms.FileField()
     def save( self, file ):
         if file:
-            id = RequestList.objects.order_by('-id')[0]
-            id = id.id
+            try:
+                id = RequestList.objects.order_by('-id')[0]
+                id = id.id
+            except:
+                id=0
             id = int(id)+1
             
             randnum=str(random.randint(0,999999))

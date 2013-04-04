@@ -5,13 +5,13 @@ from contest.models import Contest
 
 class UserModel(models.Model):
     user = models.OneToOneField(User)
+    #user = models.ForeignKey( User , unique = True )
     score = models.IntegerField(default=0,editable = False)
     accept = models.IntegerField(default=0,editable = False)
     submit = models.IntegerField(default=0,editable = False)
     
     problems = models.ManyToManyField(Problem)#show User has solved problems(Exercise)
     contests = models.ManyToManyField(Contest)#show User has registered Contest.
-    
     
     '''gender = models.BooleanField(blank = True)'''
     #school = models.CharField(max_length=128, blank=True)

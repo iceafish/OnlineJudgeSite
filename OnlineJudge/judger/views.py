@@ -35,7 +35,7 @@ def submit_code( request, problem_id = 0 ):
         if form.is_valid():
             file = request.FILES['file']
             file_name = form.save( file )
-            RList = RequestList( user = request.session['user_name'],
+            RList = RequestList( user = request.user.username,
                                  problemID = problem_id,
                                  result = 'Waiting',
                                  timeUsed = -1,
@@ -44,7 +44,10 @@ def submit_code( request, problem_id = 0 ):
                                  codeFile = "./judger/user_code/"+file_name)
             RList.save()
             curprob = Problem.objects.get( id = problem_id )
-            curuser = UserModel.objects.get( username = RList.user )
+            u = User.objects.get(username = RList.user)
+            print u,"-------------------"
+            #curuser = UserModel.objects.filter(user = u)
+            curuser = u.usermodel
             curprob.submit += 1
             curuser.submit += 1
             curprob.save()
