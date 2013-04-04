@@ -45,14 +45,12 @@ def submit_code( request, problem_id = 0 ):
             RList.save()
             curprob = Problem.objects.get( id = problem_id )
             u = User.objects.get(username = RList.user)
-            print u,"-------------------"
-            #curuser = UserModel.objects.filter(user = u)
             curuser = u.usermodel
             curprob.submit += 1
             curuser.submit += 1
             curprob.save()
             curuser.save()
-
+            print "useraccept:",curuser.accept
             try:
                 s.connect((host, port))
             except error:
@@ -63,7 +61,7 @@ def submit_code( request, problem_id = 0 ):
             ReturnRes = s.recv(2048)
             s.close()
             res, timeuse = unpack('ii', ReturnRes)
-            
+            print "res:",res
             #save_res(RList,res,timeuse,curprob,curuser)
             anws = {
                 1 : 'Accepted',
@@ -78,15 +76,15 @@ def submit_code( request, problem_id = 0 ):
             if  0 < res < 10:
                 RList.result = anws[ res ]
                 RList.timeUsed = timeuse
-                if anws == 1:
+                if res == 1:
                     curprob.accept += 1
                     curuser.accept += 1
                     curuser.save()
-                elif anws == 2:
+                elif res == 2:
                     curprob.WA += 1
-                elif anws == 3:
+                elif res == 3:
                     curprob.PE += 1
-                elif anws == 4:
+                elif res == 4:
                     curprob.TLE += 1
             else:
                 RList.result = 'System Error'

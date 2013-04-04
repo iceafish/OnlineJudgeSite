@@ -1,5 +1,7 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
+4.4.3 kitty:
+	修正AC等计数bug
 4.4.2 kitty:
 	修正bug。
 4.4.1 kitty:
