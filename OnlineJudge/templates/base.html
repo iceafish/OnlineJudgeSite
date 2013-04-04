@@ -45,7 +45,10 @@
 			<a href="/faq/"     >Faq</a>
 		</nav>
 	</header>
-	
+	<div id="bodyhead">
+		{% block bodyhead %}
+		{% endblock %}
+	</div>
 	<div id="body">
 		{% block body %}<!-- 登录部分，各页面无需改动 -->
 			

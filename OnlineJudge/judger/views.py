@@ -50,7 +50,6 @@ def submit_code( request, problem_id = 0 ):
             curuser.submit += 1
             curprob.save()
             curuser.save()
-            print "useraccept:",curuser.accept
             try:
                 s.connect((host, port))
             except error:
@@ -61,7 +60,6 @@ def submit_code( request, problem_id = 0 ):
             ReturnRes = s.recv(2048)
             s.close()
             res, timeuse = unpack('ii', ReturnRes)
-            print "res:",res
             #save_res(RList,res,timeuse,curprob,curuser)
             anws = {
                 1 : 'Accepted',
