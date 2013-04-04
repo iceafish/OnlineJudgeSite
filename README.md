@@ -1,7 +1,12 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
 
-
+4.4 kitty:
+	基本写好User模块，与系统整合较完美。
+	加入修改密码功能。
+	下一步：
+		加入找回密码功能
+		继续写Contest模块。
 4.3 kitty :
 	修改admin，将myadmin删除
 

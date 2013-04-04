@@ -2,7 +2,7 @@ from django.http import Http404,HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from users.models import UserModel
-
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -44,12 +44,18 @@ def reg(request):
         email = request.POST['email']
         
         ''' if exsit username-->'''
-        if is_ok(username,password):
-            UserModel(username=username, password=password).save()
+        try:
+            u = User.objects.get(username = username)
+        except:
+            u=None
+        if not u and password==password2:
+            u = User(username=username,email=email)
+            u.set_password(password)
+            u.save()
+            UserModel(user=u).save()
             return HttpResponse("success.")
         else:
-            raise Http404('username Error!')
-        
+            raise Http404('Error!Please Check!OR USERNAME REPEAT!')
     else:
         return render_to_response("users/reg.html",context_instance=RequestContext(request))
         #return render_to_response("users/reg.html",request)
@@ -58,3 +64,26 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect("/")
     #return render_to_response("users/logout.html",context_instance=RequestContext(request))
+def change_password(request):
+    if not request.user.is_authenticated():
+        return HttpResponse("Please Login First.")
+    
+    if request.method == 'POST':
+        if 'old_password' not in request.POST or 'new_password' not in request.POST or 'new_password2' not in request.POST:
+            return HttpResponse("ERROR")
+        user = User.objects.get(username = request.user.username )
+        if user.check_password(request.POST['old_password']):
+            if request.POST['new_password'] == request.POST['new_password2']:
+                user.set_password(request.POST['new_password'])
+                user.save()
+                return HttpResponse("Change Password Successful!")
+            else:
+                return HttpResponse("New Password Confirm ERROR!")
+        else:
+            return HttpResponse("Old Password ERROR!")
+        
+    else:
+        return render_to_response("users/changepass.html",locals())
+    
+def find_password(request):
+    pass

@@ -23,7 +23,7 @@
     Source:</br>
     {{ problem.source }}</br></br>
     
-    {% if request.session.user_id %}
+    {% if request.user.is_authenticated %}
 	    <form enctype="multipart/form-data" method="post" action="/submit/{{ problem.id }}/">
 		{% csrf_token %}
 			<table>

@@ -1,17 +1,15 @@
 {% extends "base.html" %}
 {% block login %}{% endblock %}
 {% block body %}
-	<h2>Welcome to Register</h2>
+	<h2>Change Password</h2>
 	<hr>
 	<form action="" method="post">
 	{% csrf_token %}
-		Username:<input type="text" name="username" />
+		Old Password:<input type="password" name="old_password" />
 		<br>
-		Password:<input type="password" name="password" />
+		New Password:<input type="password" name="new_password" />
 		<br>
-		Password Confirmation:<input type="password" name="password2" />
-		<br>
-		E-mail:<input type="email" name="email" />
+		New Password Confirmation:<input type="password" name="new_password2" />
 		<br>
 		<input type="submit" value="Submit" />
 		<input type="reset" value="Reset" />
