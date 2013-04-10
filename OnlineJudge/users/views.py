@@ -88,10 +88,12 @@ def change_password(request):
 def find_password(request):
     pass
 
-def my_info(request,username):
+def my_info(request):
     if not request.user.is_authenticated():
         return HttpResponse("Please Login First.")
     try:
-        u = User.objects.get(username = username)
+        u = User.objects.get(id = request.user.id)
     except:
         return HttpResponse("Not Exist This user.")
+    user = u.usermodel
+    return render_to_response("users/myinfo.html",locals())

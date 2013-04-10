@@ -24,9 +24,8 @@
 					</form>
 					<a href="/user/reg/">Register</a>
 				{% else %}
-						Welcome to {{ request.user.username }}.
+						Welcome to <a href="/user/myinfo/">{{ request.user.username }}.</a>
 						<a href="/user/logout/">Logout</a>
-						<a href="/user/changepass/">ChangePassword</a>
 				{% endif %}
 			</div>
 		{% endblock %}

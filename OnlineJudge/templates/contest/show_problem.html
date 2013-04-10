@@ -2,6 +2,13 @@
 {% block title %}
 	{{contest.name}} and {{c2p.problemID}}
 {% endblock %}
+{% block bodyhead %}
+<li><a href="../../">Problems</a></li>
+<li><a href="../../submit">Submit</a></li>
+<li><a href="../../mysubmit">MySubmissions</a></li>
+<li><a href="../../status">Status</a></li>
+<li><a href="../../standings">Standings</a></li>
+{% endblock %}
 {% block body %}
 
 {{c2p.problemID}}.{{problem.title}}

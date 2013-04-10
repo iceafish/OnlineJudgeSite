@@ -9,6 +9,8 @@ class UserModel(models.Model):
     score = models.IntegerField(default=0,editable = False)
     accept = models.IntegerField(default=0,editable = False)
     submit = models.IntegerField(default=0,editable = False)
+    solved = models.IntegerField(default=0,editable=False)
+    problem_submit = models.IntegerField(default=0,editable=False)
     
     problems = models.ManyToManyField(Problem)#show User has solved problems(Exercise)
     contests = models.ManyToManyField(Contest)#show User has registered Contest.

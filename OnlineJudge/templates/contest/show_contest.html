@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
 {% block bodyhead %}
-Problems Submit MySubmissions Status Standings
+<li><a href="./">Problems</a></li>
+<li><a href="./submit">Submit</a></li>
+<li><a href="./mysubmit">MySubmissions</a></li>
+<li><a href="./status">Status</a></li>
+<li><a href="./standings">Standings</a></li>
 {% endblock %}
 {% block body %}
 <table>
@@ -13,7 +17,7 @@ Problems Submit MySubmissions Status Standings
 </tr>
 {% for x in c2p %}
 <tr>
-<td><a href="{{x.problemID}}">{{x.problemID}}</a></td>
+<td><a href="./problem/{{x.problemID}}">{{x.problemID}}</a></td>
 <td>{{x.problem.title}}</td>
 <td>{{x.problem.submit}}</td>
 <td>{{x.problem.accept}}</td>

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+<h3>{{u.username}}</h3>
+<hr>
+Contral Panel<br>
+<a href="/user/changepass/">ChangePassword</a>
+<hr>
+Problem Submitted:{{user.problem_submit}}<br>
+Problem Solved:{{user.solved}}<br>
+Submissions:{{user.submit}}<br>
+Accepted:{{user.accept}}<br>
+
+
+
+
+<hr>
+List of solved Problems
+
+<hr>
+List of unsolved Problems
+<hr>
+
+{% endblock %}
