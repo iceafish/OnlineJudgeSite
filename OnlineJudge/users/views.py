@@ -6,8 +6,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
 
-
-
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 
@@ -53,7 +51,9 @@ def reg(request):
             u.set_password(password)
             u.save()
             UserModel(user=u).save()
-            return HttpResponse("success.")
+            user = authenticate(username=username,password=password)
+            login(request,user)
+            return HttpResponseRedirect("/")
         else:
             raise Http404('Error!Please Check!OR USERNAME REPEAT!')
     else:
@@ -95,5 +95,8 @@ def my_info(request):
         u = User.objects.get(id = request.user.id)
     except:
         return HttpResponse("Not Exist This user.")
-    user = u.usermodel
+    try:
+        user = u.usermodel
+    except:
+        user = UserModel(user = u)
     return render_to_response("users/myinfo.html",locals())

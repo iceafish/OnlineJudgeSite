@@ -5,7 +5,6 @@ from contest.models import Contest
 
 class UserModel(models.Model):
     user = models.OneToOneField(User)
-    #user = models.ForeignKey( User , unique = True )
     score = models.IntegerField(default=0,editable = False)
     accept = models.IntegerField(default=0,editable = False)
     submit = models.IntegerField(default=0,editable = False)
