@@ -76,19 +76,38 @@ def submit_code( request, problem_id = 0 ):
                 RList.timeUsed = timeuse
                 if res == 1:
                     if  not curuser.problems.filter(id = curprob.id):
-                        curuser.accept += 1
+                        curuser.solved += 1
                         curuser.problems.add(curprob)
-                        curuser.save()
-                    
+                        if curuser.unsolved_problems.filter(id = curprob.id):
+                            curuser.unsolved_problems.remove(curprob)
+                    curuser.accept += 1
+                    curuser.save()
                     curprob.accept += 1
-                        
-                    
+
                 elif res == 2:
+                    if  not curuser.problems.filter(id = curprob.id):
+                        if not curuser.unsolved_problems.filter(id = curprob.id):
+                            curuser.unsolved_problems.add(curprob)
+                            curuser.save()
                     curprob.WA += 1
                 elif res == 3:
+                    if  not curuser.problems.filter(id = curprob.id):
+                        if not curuser.unsolved_problems.filter(id = curprob.id):
+                            curuser.unsolved_problems.add(curprob)
+                            curuser.save()
                     curprob.PE += 1
                 elif res == 4:
+                    if  not curuser.problems.filter(id = curprob.id):
+                        if not curuser.unsolved_problems.filter(id = curprob.id):
+                            curuser.unsolved_problems.add(curprob)
+                            curuser.save()
                     curprob.TLE += 1
+                elif res == 8:
+                    if  not curuser.problems.filter(id = curprob.id):
+                        if not curuser.unsolved_problems.filter(id = curprob.id):
+                            curuser.unsolved_problems.add(curprob)
+                            curuser.save()
+                    curprob.CE += 1
             else:
                 RList.result = 'System Error'
             curprob.save()

@@ -99,4 +99,7 @@ def my_info(request):
         user = u.usermodel
     except:
         user = UserModel(user = u)
+    solved_list = user.problems.all()
+    unsolved_list = user.unsolved_problems.all()
+    
     return render_to_response("users/myinfo.html",locals())

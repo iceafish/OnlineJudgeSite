@@ -6,17 +6,17 @@
 <tr>
 <th>No.</th>
 <th>WHO</th>
-<th>AC</th>
+<th>Solved</th>
 <th>SUBMIT</th>
-<th>SCORE</th>
+<!-- <th>SCORE</th> -->
 </tr>
 {% for x in u %}
 <tr>
 <td>{{x.id}}</td>
 <td>{{x.user.username}}</td>
-<td>{{x.accept}}</td>
+<td>{{x.solved}}</td>
 <td>{{x.submit}}</td>
-<td>{{x.score}}</td>
+<!-- <td>{{x.score}}</td> -->
 </tr>
 {% endfor %}
 </table>

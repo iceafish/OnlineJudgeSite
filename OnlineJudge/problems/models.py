@@ -33,6 +33,7 @@ class Problem( models.Model ):
     TLE = models.IntegerField( default = 0, editable = False )
     MLE = models.IntegerField( default = 0, editable = False )
     PE = models.IntegerField( default = 0, editable = False )
+    CE = models.IntegerField(default = 0, editable = False )
     Ratio = models.FloatField( default = 0, editable = False )
     
     # Total Submit imformation
@@ -43,4 +44,4 @@ class Problem( models.Model ):
     #level = models.IntegerField()
     
     def __unicode__( self ):
-        return u'%s' % ( self.title )
+        return u'%s' % ( self.id )

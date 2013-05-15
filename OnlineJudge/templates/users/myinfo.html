@@ -18,9 +18,15 @@ Accepted:{{user.accept}}<br>
 
 <hr>
 List of solved Problems
+{% for x in solved_list %}
+<a href = "/problem/{{x}}">{{x}}</a>&nbsp&nbsp
 
+{% endfor %}
 <hr>
 List of Submit BUT unsolved Problems
+{% for x in unsolved_list %}
+<a href = "/problem/{{x}}">{{x}}</a>&nbsp&nbsp
+{% endfor %}
 <hr>
 
 {% endblock %}
