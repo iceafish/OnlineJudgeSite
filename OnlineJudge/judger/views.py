@@ -75,9 +75,14 @@ def submit_code( request, problem_id = 0 ):
                 RList.result = anws[ res ]
                 RList.timeUsed = timeuse
                 if res == 1:
+                    if  not curuser.problems.filter(id = curprob.id):
+                        curuser.accept += 1
+                        curuser.problems.add(curprob)
+                        curuser.save()
+                    
                     curprob.accept += 1
-                    curuser.accept += 1
-                    curuser.save()
+                        
+                    
                 elif res == 2:
                     curprob.WA += 1
                 elif res == 3:

@@ -1,5 +1,8 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
+5.15.1 kitty:
+	修正bug。
+
 5.15 kitty:
 	修正管理员进入myinfo出现错误的bug.
 4.4.3 kitty:
@@ -188,6 +191,7 @@ OnlineJudgeSite
 
 
 	
+
 
 
 
