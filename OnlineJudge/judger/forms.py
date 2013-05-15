@@ -1,7 +1,6 @@
 from django import forms
 from judger.models import RequestList
 import random
-
 class SubmitForm( forms.Form ):
     Language = forms.ChoiceField(
                                widget   = forms.Select(), 
@@ -22,10 +21,9 @@ class SubmitForm( forms.Form ):
             except:
                 id=0
             id = int(id)+1
-            
-            randnum=str(random.randint(0,999999))
-            
-            file_name=str(id)+"_"+randnum+".cpp"
+            #randnum=str(random.randint(0,999999))
+            #file_name=str(id)+"_"+randnum+".cpp"
+            file_name = str(id)+".cpp"
             #destination = open('./judger/tmp/'+file.name, 'wb+')
             destination = open('./judger/user_code/'+file_name, 'wb+')
         for chunk in file.chunks():

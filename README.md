@@ -1,5 +1,7 @@
 OnlineJudgeSite
 请在这里做版本信息修改说明，注明修改人。
+5.15.3 kitty:
+	通过加Lock,实现不同人在同一时刻提交代码不会出现结果不正确的bug。
 5.15.2 kitty:
 	user 已经ok.
 5.15.1 kitty:

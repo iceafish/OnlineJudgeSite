@@ -10,7 +10,8 @@ from struct import unpack
 from JudgeQue import put,pull,getSize
 from problems.models import Problem
 from users.models import *
-
+import threading
+lock = threading.Lock()
 def add_judge_request( RList ):
     if getSize() < JUDGEQUE_SIZE:
         put( RList )
@@ -31,8 +32,10 @@ def submit_code( request, problem_id = 0 ):
     s = socket(AF_INET, SOCK_STREAM)
     
     if request.method == 'POST':
+        
         form = SubmitForm(request.POST,request.FILES)
         if form.is_valid():
+            lock.acquire() # ----------------------------------------------
             file = request.FILES['file']
             file_name = form.save( file )
             RList = RequestList( user = request.user.username,
@@ -50,6 +53,7 @@ def submit_code( request, problem_id = 0 ):
             curuser.submit += 1
             curprob.save()
             curuser.save()
+            
             try:
                 s.connect((host, port))
             except error:
@@ -59,6 +63,9 @@ def submit_code( request, problem_id = 0 ):
             s.sendall('%d' % RList.id)
             ReturnRes = s.recv(2048)
             s.close()
+            
+            lock.release()
+            
             res, timeuse = unpack('ii', ReturnRes)
             #save_res(RList,res,timeuse,curprob,curuser)
             anws = {
