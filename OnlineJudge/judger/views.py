@@ -7,11 +7,21 @@ import datetime
 from socket import *
 from setting import *
 from struct import unpack
-from JudgeQue import put,pull,getSize
+from JudgeQue import put,pull,getSize,getReq,isEmpty
 from problems.models import Problem
 from users.models import *
 import threading
+import time
+    
+            
 lock = threading.Lock()
+mythread = MyThread()
+mythread.start()
+
+
+#-----start__threading--------------------------------#
+
+#-----------------------------------------------------#
 def add_judge_request( RList ):
     if getSize() < JUDGEQUE_SIZE:
         put( RList )
@@ -24,47 +34,60 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 
 def submit_code( request, problem_id = 0 ):
-    if problem_id == 0:
-        return  
+    temp_prob = None
+    if problem_id == 0 and not isEmpty():
+        temp_prob = pull()
     
     host = JUDGE_HOST
     port = JUDGE_POST
-    s = socket(AF_INET, SOCK_STREAM)
     
-    if request.method == 'POST':
-        
-        form = SubmitForm(request.POST,request.FILES)
-        if form.is_valid():
-            lock.acquire() # ----------------------------------------------
-            file = request.FILES['file']
-            file_name = form.save( file )
-            RList = RequestList( user = request.user.username,
-                                 problemID = problem_id,
-                                 result = 'Waiting',
-                                 timeUsed = -1,
-                                 languageTypeID = request.POST['Language'],
-                                 submitTime = datetime.datetime.now(),
-                                 codeFile = "./judger/user_code/"+file_name)
-            RList.save()
-            curprob = Problem.objects.get( id = problem_id )
-            u = User.objects.get(username = RList.user)
-            curuser = u.usermodel
-            curprob.submit += 1
-            curuser.submit += 1
-            curprob.save()
-            curuser.save()
+    
+    if (request and request.method == 'POST') or temp_prob!=None:
+        if problem_id != 0:
+            form = SubmitForm(request.POST,request.FILES)
+        else:
+            form = None
+        if ( form and form.is_valid() ) or temp_prob:
+            if form and form.is_valid():
+                lock.acquire() # ----------------------------------------------
+                file = request.FILES['file']
+                file_name = form.save( file )
+                RList = RequestList( user = request.user.username,
+                                     problemID = problem_id,
+                                     result = 'Waiting',
+                                     timeUsed = -1,
+                                     languageTypeID = request.POST['Language'],
+                                     submitTime = datetime.datetime.now(),
+                                     codeFile = "./judger/user_code/"+file_name)
+                RList.save()
+                curprob = Problem.objects.get( id = problem_id )
+                u = User.objects.get(username = RList.user)
+                curuser = u.usermodel
+                curprob.submit += 1
+                curuser.submit += 1
+                curprob.save()
+                curuser.save()
+                
+                lock.release()#<---------------------------------------------
+            else:
+                lock.acquire() # ----------------------------------------------
+                RList = temp_prob
+                curprob = Problem.objects.get( id = RList.problemID )
+                u = User.objects.get(username = RList.user)
+                curuser = u.usermodel
+                lock.release()
             
+            s = socket(AF_INET, SOCK_STREAM)
             try:
                 s.connect((host, port))
             except error:
-                print "Error connecting server %s." % host
-                return
+                put(RList)
+                return HttpResponseRedirect("/status/")
             
             s.sendall('%d' % RList.id)
             ReturnRes = s.recv(2048)
             s.close()
             
-            lock.release()
             
             res, timeuse = unpack('ii', ReturnRes)
             #save_res(RList,res,timeuse,curprob,curuser)

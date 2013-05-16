@@ -11,6 +11,7 @@ def pull():
 
 def getSize():
     return req.qsize()
-def getReqID():
-    return id(req)
-
+def getReq():
+    return req
+def isEmpty():
+    return req.empty()
