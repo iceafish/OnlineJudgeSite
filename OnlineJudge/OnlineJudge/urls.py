@@ -6,7 +6,7 @@ from judger.views import submit_code
 import problems.urls
 import users.urls
 import myadmin.urls
-import contest.urls
+#import contest.urls
 #from problems import urls 
 import settings
 admin.autodiscover()
@@ -22,9 +22,11 @@ urlpatterns = patterns('',
     url(r'^user/', include( users.urls )),
 
 #Not define just have something show    
-    url(r'^contests/', include(contest.urls)),
+    #url(r'^contests/', include(contest.urls)),
     url(r'^ranklist/$', show_ranklist),
     url(r'^status/$', show_status),
+    url(r'^status/(\d+)$', show_status),
+    
     url(r'^faq/$', show_faq),
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

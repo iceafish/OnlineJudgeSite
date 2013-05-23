@@ -1,19 +1,18 @@
 {% extends "base.html" %}
 {% block body %}
-<h3>{{u.username}}</h3>
+<center>
+<h2>{{u.username}}</h2>
 <hr>
 Contral Panel<br>
 <a href="/user/changepass/">ChangePassword</a>
 <hr>
-<hr>
-Rank:
-<hr>
-Problem Submitted:{{user.problem_submit}}<br>
-Problem Solved:{{user.solved}}<br>
-Submissions:{{user.submit}}<br>
-Accepted:{{user.accept}}<br>
-
-
+<table>
+<tr>
+<tr><td>Problem Solved:</td><td>{{user.solved}}</td></tr>
+<tr><td>Submissions:</td><td>{{user.submit}}</td></tr>
+<tr><td>Accepted:</td><td>{{user.accept}}</td></tr>
+</table>
+</center>
 
 
 <hr>

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Status{% endblock %}
+{% block sub %}{% endblock %}
 {% block body %}
 	<table width="100%">
 	<th width="5%">ID</th>
@@ -32,4 +33,8 @@
 	</tr>
 	{% endfor %}
 	</table>
+	PAGE:-->
+	{% for x in pagenum %}
+	<a href = "/status/{{x}}">{{x}}</a>&nbsp
+	{% endfor %}
 {% endblock %}

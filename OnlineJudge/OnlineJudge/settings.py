@@ -127,7 +127,6 @@ INSTALLED_APPS = (
     'problems',
     'users',
     'judger',
-    'contest',
 )
 
 # A sample logging configuration. The only tangible logging

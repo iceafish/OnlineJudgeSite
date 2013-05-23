@@ -1,20 +1,18 @@
 {% extends "base.html" %}
 {% block title %}Problem {{problem.title}}{% endblock %}
-
 {% block body %}
-	<center>
-	{{ problem.title }}</br>
-	Total Submissions:  {{ problem.submit }} Accepted: {{ problem.accept }}</br>
-	Time Limit: {{ problem.TimeLimit }}s  Memory Limit: {{ problem.MemoryLimit }}k</br>
-	Description:</br>
+	<h3>{{ problem.title }}</h3>
+	Total Submissions:  {{ problem.submit }}</br> Accepted: {{ problem.accept }}</br>
+	Time Limit: {{ problem.TimeLimit }}s </br> Memory Limit: {{ problem.MemoryLimit }}k</br>
+	<font color="blue" ><b>Description:</b></font></br>
 	{{ problem.description }}</br>
-	Input:</br>
+	<font color="blue" ><b>Input:</b></font></br>
 	{{ problem.input }}</br>
-	Output:</br>
+	<font color="blue" ><b>Output:</b></font></br>
 	{{ problem.output }}</br>
-	Sample Input:</br>
+	<font color="blue" ><b>Sample Input:</b></font></br>
 	{{ problem.SampleInput }}</br>
-	Sample Output:</br>
+	<font color="blue" ><b>Sample Output:</b></font></br>
 	{{ problem.SampleOutput }}</br>
 	{% if problem.hint %}
 		<body>Hint:</body></br>
@@ -23,19 +21,4 @@
     Source:</br>
     {{ problem.source }}</br></br>
     
-    {% if request.user.is_authenticated %}
-	    <form enctype="multipart/form-data" method="post" action="/submit/{{ problem.id }}/">
-		{% csrf_token %}
-			<table>
-	    	{% for field in form %}
-	      		{{ field.label_tag }}: {{ field }}</br>
-	    	{% endfor %} 
-	  		</table>
-			<input class="submit" type="submit" value="Submit"/></br>
-		</form>
-    {% else %}
-   	 	<font size="6px" color="red" >If you want to submit your code</br> please log first.</font>
-    {% endif %}
-    
-	</center>
 {% endblock %}

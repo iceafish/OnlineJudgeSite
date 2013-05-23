@@ -8,10 +8,9 @@ class MyThread(threading.Thread):
         threading.Thread.__init__(self)
     def run(self):
         while True:
-            print "run threading~"
             if not isEmpty():
                 submit_code(None,problem_id = 0)
-            time.sleep(5)
+            time.sleep(2)
 mythread = None
 
 def get_and_run():

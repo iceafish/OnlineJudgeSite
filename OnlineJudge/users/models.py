@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from problems.models import Problem
-from contest.models import Contest
 
 class UserModel(models.Model):
     user = models.OneToOneField(User)
@@ -12,7 +11,7 @@ class UserModel(models.Model):
     problem_submit = models.IntegerField(default=0,editable=False)
     
     problems = models.ManyToManyField(Problem,related_name="solved+")#show User has solved problems(Exercise)
-    contests = models.ManyToManyField(Contest)#show User has registered Contest.
+    
     unsolved_problems = models.ManyToManyField(Problem,related_name="unsolved+")
     '''gender = models.BooleanField(blank = True)'''
     #school = models.CharField(max_length=128, blank=True)

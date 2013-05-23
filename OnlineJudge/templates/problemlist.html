@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Problem List{% endblock %}
-{% block head %}<!-- 用于导入CSS文件 -->
-	<link rel="stylesheet" href="/css/header.css">
-	<link rel="stylesheet" href="/css/problems.css">
-{% endblock %}
+{% block sub %}{% endblock %}
 
 {% block body %}
 	<table width="100%">
@@ -24,4 +21,9 @@
 	</tr>
 	{% endfor %}
 	</table>
+	PAGE:-->
+	{% for x in pagenum %}
+	<a href = "/problem/page{{x}}">{{x}}</a>&nbsp
+	{% endfor %}
+	
 {% endblock %}

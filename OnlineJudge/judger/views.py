@@ -12,11 +12,9 @@ from problems.models import Problem
 from users.models import *
 import threading
 import time
-    
-            
+
 lock = threading.Lock()
-mythread = MyThread()
-mythread.start()
+
 
 
 #-----start__threading--------------------------------#

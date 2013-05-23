@@ -1,0 +1,77 @@
+    #tabs1 {
+      float:left;
+    
+	  background:#FAF6DB;
+      font-size:15px;
+      line-height:normal;
+	  font-family:Helvetica, sans-serif;
+	  font-weight:bold;
+	  padding-top:10px; 
+	  padding-bottom:5px;
+	  height:26px;
+	  margin:0px;
+	  line-height:normal;
+	  
+	   /*   height:100%;Fix for MSIE peekaboo bug */
+	 
+      }
+    #tabs1 ul {
+	  margin:0;
+	 list-style:none;
+	  float:left;
+	 padding:0px;
+	 
+      }
+    #tabs1 li {
+      display:inline;
+      margin:0;
+      padding:0;
+	  voice-family:"\"}\"";
+	  line-height:16px;
+	  height:25px;
+	  float:left;
+	  
+	  
+      }
+    #tabs1 a {
+      float:left;
+      background:url("/image/tableft1.gif") no-repeat left top;
+      margin:0;
+      padding:0 0 0 4px;
+      text-decoration:none;
+	  
+      }
+    #tabs1 a span {
+      float:left;
+      display:block;
+      background:url("/image/tabright1.gif") no-repeat right top;
+	  color:#2C1C0F;
+      padding:3px 9px 6px 5px; 
+	  voice-family:"\"}\"";
+	  padding-top:2px;
+      }
+    /* Commented Backslash Hack hides rule from IE5-Mac \*/
+    #tabs1 a span {float:none;}
+    /* End IE5-Mac hack */
+    #tabs a:hover span {
+      color:#FFFFFF;
+	  
+      }
+    #tabs1 a:hover {
+      background-position:0% -42px;
+	   color:#FFFFFF;
+      }
+    #tabs1 a:hover span {
+      background-position:100% -42px;
+	   color:#FFFFFF;
+      }
+
+      #tabs1 #current a {
+      	background-position:0% -42px;
+		 color:#FFFFFF;
+      }
+      #tabs1 #current a span {
+      	background-position:100% -42px;
+		 color:#FFFFFF;
+      }
+
