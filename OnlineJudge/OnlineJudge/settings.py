@@ -126,7 +126,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'problems',
     'users',
-    'judger',
+    #'judger',
+    'JRequest',
 )
 
 # A sample logging configuration. The only tangible logging

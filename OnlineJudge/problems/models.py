@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.admin import ModelAdmin
-# Create your models here.
+
+def getFilePath(instance, filename):
+    
+    return "DataSet/ProblemData/"
+
 class DataFile(models.Model):
     name = models.CharField(max_length=10, unique=True)
     in_file = models.FileField(upload_to="problemset/datafile")
@@ -24,7 +28,6 @@ class Problem( models.Model ):
     hint = models.TextField( blank = True )
     source = models.CharField( max_length = 256, blank = True )
     
-    #te = models.Manager()
     TestFile = models.ManyToManyField( DataFile, blank = True )
 
     accept = models.IntegerField( default = 0, editable = False )

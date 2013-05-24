@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from problems import models
-from judger.forms import SubmitForm
+from JRequest.forms import SubmitForm
 from problems.models import Problem
 # Create your views here.
 
